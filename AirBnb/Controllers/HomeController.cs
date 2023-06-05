@@ -22,7 +22,7 @@ namespace AirBnb.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your contacttttttt page.";
 
             return View();
         }
