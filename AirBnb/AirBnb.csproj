@@ -132,6 +132,7 @@
   <ItemGroup>
     <Content Include="Assets\Icons\EvaSearchFill.svg" />
     <Content Include="Assets\Images\airrbnb_logo.png" />
+    <Content Include="Assets\Images\quan.png" />
     <Content Include="Assets\Images\sunset_1.jpg" />
     <Content Include="Assets\Scripts\app.js" />
     <Content Include="Content\bootstrap-grid.css" />

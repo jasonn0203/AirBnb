@@ -91,7 +91,7 @@ a {
 }
 
 
-.carousel-control-next-icon {
+/*.carousel-control-next-icon {
     background-image: url("https://api.iconify.design/material-symbols:arrow-circle-right.svg?color=%23888888");
 }
 
@@ -99,7 +99,7 @@ a {
 .carousel-control-prev-icon {
     background-image: url("https://api.iconify.design/material-symbols:arrow-circle-left.svg?color=%23888888");
 }
-
+*/
 .carousel {
     position: relative;
 }
@@ -112,6 +112,7 @@ a {
 }
 
 .carousel-control-prev {
+ 
     left: -10%;
 }
 
@@ -174,7 +175,7 @@ carousel-inner {
     height: 300px;
     width: 320px;
     margin-top: 20px;
-    margin: 0 auto;
+
 }
 
 @keyframes slide_animation {
@@ -255,10 +256,7 @@ carousel-inner {
         transition: 0.5s linear;
     }
 
-    .img:nth-child(2):hover {
-        transform: scale(1.125) rotate(357deg);
-        transition: 0.5s linear;
-    }
+
 
 .TypeAndRating {
     width: 300px;
@@ -267,4 +265,8 @@ carousel-inner {
 
 .PRating {
     margin-left: 100px;
+}
+.footer-border {
+    border-bottom: 1px solid rgba(255, 95, 99, 0.5);
+
 }
