@@ -1,12 +1,17 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    height: 100vw;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -21,4 +26,60 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.airbnb_logo {
+    max-width: 120px;
+}
+
+.primaryColor {
+    color: #ff5f63;
+}
+
+.bg-primary {
+    background-color: #ff5f63 !important;
+}
+
+.accentColor {
+    color: #D78DC9;
+}
+
+.form-control {
+    min-width: 300px !important;
+    padding-right: 48px;
+}
+
+    .form-control:focus {
+        border-color: #ff5f63;
+    }
+
+.btn-search {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    border: none;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+}
+
+.user--dropdown {
+    background: transparent;
+    padding: 5px 5px 5px 12px;
+    cursor: pointer;
+    margin: 0;
+    text-align: inherit;
+    border: 1px solid #DDDDDD;
+    border-radius: 21px;
+    transition: box-shadow 0.2s ease;
+}
+
+.dropdown-menu[data-bs-popper] {
+    right: 0 !important;
+    left: auto;
+}
+
+.appNav {
+    display: flex !important;
+    justify-content: space-between !important;
 }

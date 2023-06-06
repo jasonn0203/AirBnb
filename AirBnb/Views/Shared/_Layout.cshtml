@@ -1,42 +1,85 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/component.css" rel="stylesheet" />
+
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Hommyyyyyyy", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Aboutttttttt", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+<body class=" mx-auto ">
+    @*NAVIGATION*@
+    <nav class="body-content navbar navbar-expand-md sticky-md-top py-lg-3 py-2 bg-white border-bottom">
+        <div class="container-fluid">
+            @*LOGO*@
+            <a class="navbar-brand" href="#">
+                <img class="airbnb_logo h-100 object-fit-cover" src="~/Assets/Images/airrbnb_logo.png" alt="AirBnb Logo" />
+            </a>
+
+
+            @*Search*@
+
+            @using (Html.BeginForm("", "", FormMethod.Post))
+            {
+
+                <div class="d-flex position-relative">
+                    <input class="form-control  py-2 rounded-pill shadow-none " type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn-search bg-primary d-flex align-items-center justify-content-center  translate-middle-y" type="submit">
+                        @* <img class="w-50 h-50 object-fit-cover white" src="~/Assets/Icons/EvaSearchFill.svg" alt="Search" />*@
+
+
+                        <svg class=" z-1 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g id="evaSearchFill0"><g id="evaSearchFill1"><path id="evaSearchFill2" fill="#FFFFFF" d="m20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8a7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42ZM5 11a6 6 0 1 1 6 6a6 6 0 0 1-6-6Z" /></g></g></svg>
+                    </button>
+
+                </div>
+            }
+
+            @*User Panel*@
+            <div class=" dropdown" data-bs-toggle="dropdown">
+                <div class="  dropdown-toggle d-flex align-items-center justify-content-center gap-2 user--dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g id="evaMenuFill0"><g id="evaMenuFill1"><g id="evaMenuFill2" fill="#000000"><rect width="18" height="2" x="3" y="11" rx=".95" ry=".95" /><rect width="18" height="2" x="3" y="16" rx=".95" ry=".95" /><rect width="18" height="2" x="3" y="6" rx=".95" ry=".95" /></g></g></g></svg>
+                    <img class="object-fit-cover" width="24" height="24" src="~/Assets/Images/airrbnb_logo.png" />
+                </div>
+
+
+
+
+                <ul class="dropdown-menu">
+                    <li><h5 class="dropdown-header primaryColor border-bottom">Account</h5></li>
+                    <li><a class="dropdown-item mt-2" href="#">Sign Up</a></li>
+                    <li><a class="dropdown-item" href="#">Log In</a></li>
+                    <li><h5 class="dropdown-header primaryColor border-bottom">Help</h5></li>
+                    <li><a class="dropdown-item " href="#">About AirBnb</a></li>
                 </ul>
+
             </div>
+
+
+
+
         </div>
-    </div>
-    <div class="container body-content">
+    </nav>
+
+
+
+
+
+    <div class="container-fluid body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Assets/Scripts/app.js"></script>
+    <script src="https://unpkg.com/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
+
 </html>
