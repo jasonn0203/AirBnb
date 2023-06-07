@@ -6,14 +6,12 @@ using System.Web.Mvc;
 
 namespace AirBnb.Controllers
 {
-    public class HomeController : Controller
+    public class RoomController : Controller
     {
-        // GET: Home
-        public ActionResult Index()
+        // GET: Room
+        public ActionResult Detail()
         {
             return View();
         }
-
-  
     }
 }

@@ -11,11 +11,28 @@
     @Html.Partial("PlaceFilterCarousel")
 
 
-    <h2 class="fw-bold my-4 my-md-5">Your Choices !</h2>
+
+    <div class="content">
+        <div class="content__container">
+            <p class="content__container__text">
+                Your
+            </p>
+
+            <ul class="content__container__list">
+                <li class="content__container__list__item primaryColor">Choices !</li>
+                <li class="content__container__list__item primaryColor">Styles !</li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+
 
     <div class="placeList">
 
-        <a class="placeFrame">
+        <a href=" @Url.Action("Detail", "Room")" class="placeFrame">
             <div class="slider-frame mx-auto mx-md-0">
                 <div class="slide-images">
                     <div class="img-container">
