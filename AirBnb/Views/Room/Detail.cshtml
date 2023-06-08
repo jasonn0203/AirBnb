@@ -54,10 +54,10 @@
     </section>
 
     @*Grid Room Image*@
-    <section class="mx-auto my-5">
-        <div class="d-flex gap-3 flex-wrap mx-auto mx-md-0 justify-content-center">
+    <section class="mx-auto my-5 ">
+        <div class="d-flex gap-3 flex-wrap mx-auto mx-md-0 justify-content-center ">
             <div class=" room-grid">
-                <img width="550" height="300" class="object-fit-cover" src="~/Assets/Images/sunset_1.jpg" alt="1" />
+                <img width="550" height="400" class="object-fit-cover" src="~/Assets/Images/room_2.jpg" alt="1" />
             </div>
             <div class="d-flex gap-4 overflow-hidden"
                  style="border-top-right-radius: 40px; border-bottom-right-radius: 40px;">
@@ -93,6 +93,66 @@
 
 
     @*DETAIL BODY*@
+    <section class="my-5">
+        <div class="row gap-4">
+            <div class="col-7 ">
+                <div class="d-flex align-items-center justify-content-between bg-body py-4 border-custom-bottom">
+                    <div class="d-flex flex-column ">
+                        <p class="fw-bold fs-4">
+                            House hosted by JASON
+                        </p>
+                        <p class="text-black-50">
+                            3 guests - 1 bedroom - 1 bed - 1 bath
+                        </p>
+                    </div>
+                    <div>
+                        <img width="55" height="55" class="object-fit-cover rounded-circle" src="~/Assets/Images/quan.png" alt="Alternate Text" />
+                    </div>
+                </div>
+
+
+                @*Description*@
+                <div class="py-3">
+                    <p class="text-description ">
+                        Located in the Bomun Tourist Complex in Gyeongju, at the end of the road, 7 minutes by car from Bomun Complex, 5 minutes from Bumun Temple, Gyeongju's downtown area, and about 20 minutes to Yangnam and Gampo (sea area station), our accommodation is located in a good area to travel.
+
+                        Lazy House is a warm wooden house that is a great space for couples to use. You can see Mt. Tohamsan in the emotional room:)
+
+                        Enjoy barbecue and relaxation on the private terrace looking at the yard:)
+
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-4 room-checkout position-relative">
+                <div class="d-flex justify-content-between">
+                    <span class="fw-bolder fs-3">
+                        150$
+                        <span class="fw-normal fs-5">night</span>
+                    </span>
+                </div>
+                <div>Guest :</div>
+
+                <div class="input-group my-2">
+                    <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                        <option selected>Select ..</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+
+                </div>
+
+                @*Button*@
+                <a class="btn-reserve position-absolute fixed-bottom " href="#">Reserve</a>
+
+                
+            </div>
+        </div>
+    </section>
 
 </main>
 
