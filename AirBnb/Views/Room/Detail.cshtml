@@ -94,8 +94,8 @@
 
     @*DETAIL BODY*@
     <section class="my-5">
-        <div class="row gap-4">
-            <div class="col-7 ">
+        <div class="row  flex-column-reverse flex-lg-row gap-md-4 align-items-center justify-content-center align-items-md-start justify-content-md-start ">
+            <div class="col-lg-7 col px-2 ">
                 <div class="d-flex align-items-center justify-content-between bg-body py-4 border-custom-bottom">
                     <div class="d-flex flex-column ">
                         <p class="fw-bold fs-4">
@@ -105,9 +105,9 @@
                             3 guests - 1 bedroom - 1 bed - 1 bath
                         </p>
                     </div>
-                    <div>
+                    <a href="@Url.Action("About","User")">
                         <img width="55" height="55" class="object-fit-cover rounded-circle" src="~/Assets/Images/quan.png" alt="Alternate Text" />
-                    </div>
+                    </a>
                 </div>
 
 
@@ -123,9 +123,99 @@
 
                     </p>
                 </div>
+
+                @*Comment*@
+
+
+                <div class="container my-4">
+
+                    <div class="row height d-flex justify-content-center align-items-center">
+
+                        <div class="col px-md-0">
+
+                            <div class="card">
+
+                                <div class="p-3">
+
+                                    <h6 class="primaryColor fw-bold fs-4">Reviews</h6>
+
+                                </div>
+
+                                <div class="mt-3 d-flex flex-row gap-4 align-items-center p-3 form-color">
+
+                                    <img src="https://i.imgur.com/zQZSWrt.jpg" width="50" class="rounded-circle mr-2">
+                                    <textarea class="comment-section" placeholder="Enter your comment..."></textarea>
+
+                                </div>
+
+
+                                <div class="mt-2">
+
+                                    <div class="d-flex flex-row p-3 gap-4">
+
+                                        <img src="https://i.imgur.com/zQZSWrt.jpg" width="32" height="32" class="rounded-circle mr-3">
+
+                                        <div class="w-100">
+
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex flex-row align-items-center gap-2">
+                                                    <span class="mr-2 fw-medium fs-6">Donald Trump</span>
+                                                    <small class="c-badge">Top Comment</small>
+                                                </div>
+
+
+                                            </div>
+
+                                            <p class="text-justify comment-text mb-0">Good Service, Best view, good expermient ! , Good Service, Best view, good expermient !, Good Service, Best view, good expermient !</p>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="d-flex flex-row p-3 gap-4">
+
+                                        <img src="https://i.imgur.com/zQZSWrt.jpg" width="32" height="32" class="rounded-circle mr-3">
+
+                                        <div class="w-100">
+
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex flex-row align-items-center gap-2">
+                                                    <span class="mr-2 fw-medium fs-6">Donald Trump</span>
+                                                    <small class="c-badge">Top Comment</small>
+                                                </div>
+
+
+                                            </div>
+
+                                            <p class="text-justify comment-text mb-0">Good Service, Best view, good expermient ! , Good Service, Best view, good expermient !, Good Service, Best view, good expermient !</p>
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
             </div>
 
-            <div class="col-4 room-checkout position-relative">
+            <div class="col-lg-4 p-4 room-checkout position-relative mx-auto  ">
                 <div class="d-flex justify-content-between">
                     <span class="fw-bolder fs-3">
                         150$
@@ -146,16 +236,43 @@
 
                 </div>
 
+                @*Date Picker*@
+
+
+
+
+                @*Price and Fees*@
+                <div class="my-4">
+                    <div class="d-flex justify-content-between mb-4  ">
+                        <p class="text-black-50 fw-bold">1 nights</p>
+                        <p class=" fw-bold primaryColor">100$</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4  text-black-50">
+                        <p class="text-black-50 fw-bold">Airbnb Service Fee</p>
+                        <p class=" fw-bold primaryColor">40$</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between pb-4 text-black-50 border-bottom">
+                        <p class="text-black-50 fw-bold">Cleaning Fee</p>
+                        <p class=" fw-bold primaryColor">14$</p>
+                    </div>
+
+                    @*TOTAL FEE*@
+                    <div class="d-flex justify-content-between pt-4 text-black-50 ">
+                        <p class="fw-bold fs-4">Total Fee</p>
+                        <p class=" fw-bold primaryColor fs-4">154$</p>
+                    </div>
+
+                </div>
+
                 @*Button*@
                 <a class="btn-reserve position-absolute fixed-bottom " href="#">Reserve</a>
 
-                
+
             </div>
         </div>
     </section>
 
 </main>
-
-
-
 

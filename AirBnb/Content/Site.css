@@ -690,8 +690,8 @@ input:checked + label .action span.option-2 {
 }
 
 .room-checkout {
-    padding: 20px;
-    height: 500px;
+    width: 370px;
+    min-height: 500px;
     border-radius: 22px;
     border: 1px solid #ff5f63;
     overflow: hidden;
@@ -724,9 +724,70 @@ input:checked + label .action span.option-2 {
     right: 20px;
 }
 
-.btn-reserve:hover{
-    opacity: 75%;
-    transition: 0.25s linear;
+    .btn-reserve:hover {
+        opacity: 75%;
+        transition: 0.25s linear;
+    }
+
+/*-----DATE PICKER-----*/
+
+
+.card {
+    background-color: #fff;
+    border: none;
 }
 
-/*----------*/
+.form-color {
+    background-color: #fafafa;
+}
+
+.comment-section {
+    width: 100%;
+    min-height: 50px;
+    border-radius: 12px;
+    resize: none;
+    padding-inline: 12px;
+    padding-block: 4px;
+    overflow: hidden;
+}
+
+    .comment-section:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #ff5f63;
+        outline: 0;
+        box-shadow: none;
+    }
+
+.c-badge {
+    background-color: #ff5f63;
+    color: white;
+    height: 20px;
+    font-size: 11px;
+    width: 92px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.comment-text {
+    font-size: 13px;
+}
+
+.user-general-box {
+    padding: 32px 24px;
+    background-color: white;
+    border-radius: 24px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 10px;
+}
+
+.sub-text-color {
+    color: #222222;
+}
+
+.about-user-box {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 10px;
+    border-radius: 24px;
+}
