@@ -28,6 +28,11 @@ textarea {
     max-width: 280px;
 }
 
+    input:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
 .airbnb_logo {
     max-width: 120px;
 }
@@ -84,6 +89,12 @@ p {
     border-radius: 21px;
     transition: box-shadow 0.2s ease;
 }
+
+    .user--dropdown:hover {
+        transition: 0.8s ease-in-out;
+        background-color: #ff5f63;
+        opacity: 0.75;
+    }
 
 .dropdown-menu.show {
     min-width: 160px;
@@ -791,3 +802,183 @@ input:checked + label .action span.option-2 {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 10px;
     border-radius: 24px;
 }
+
+/*SIGN UP FORM*/
+
+
+.intro-section {
+    background-image: url("/Assets/Images/airbnb_signup_banner.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 75px 95px;
+    min-height: 80vh;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+@media (max-width: 991px) {
+    .intro-section {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .intro-section {
+        padding: 28px;
+    }
+}
+
+@media (max-width: 575px) {
+    .intro-section {
+        min-height: auto;
+    }
+}
+
+.brand-wrapper .logo {
+    height: 35px;
+}
+
+@media (max-width: 767px) {
+    .brand-wrapper {
+        margin-bottom: 35px;
+    }
+}
+
+.intro-content-wrapper {
+    width: 410px;
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+    .intro-content-wrapper .intro-title {
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 17px;
+    }
+
+    .intro-content-wrapper .intro-text {
+        font-size: 19px;
+        line-height: 1.37;
+    }
+
+
+
+
+
+@media (max-width: 767px) {
+    .intro-section-footer {
+        margin-top: 35px;
+    }
+}
+
+.intro-section-footer .footer-nav a {
+    font-size: 20px;
+    font-weight: bold;
+    color: inherit;
+}
+
+@media (max-width: 767px) {
+    .intro-section-footer .footer-nav a {
+        font-size: 14px;
+    }
+}
+
+.intro-section-footer .footer-nav a + a {
+    margin-left: 30px;
+}
+
+.form-section {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+@media (max-width: 767px) {
+    .form-section {
+        padding: 35px;
+    }
+
+    .intro-title {
+        display: none;
+    }
+}
+
+.login-wrapper {
+    /*width: 300px;*/
+    max-width: 100%;
+}
+
+@media (max-width: 575px) {
+    .login-wrapper {
+        width: 100%;
+    }
+}
+
+.login-wrapper .form-control {
+    border: 0;
+    border-bottom: 1px solid #e7e7e7;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px 10px;
+    margin-bottom: 7px;
+    border-radius: 12px;
+}
+
+    .login-wrapper .form-control:focus {
+        border-color: #ff5f63;
+    }
+
+    .login-wrapper .form-control::-webkit-input-placeholder {
+        color: #ff5f63;
+    }
+
+    .login-wrapper .form-control::-moz-placeholder {
+        color: #ff5f63;
+    }
+
+    .login-wrapper .form-control:-ms-input-placeholder {
+        color: #ff5f63;
+    }
+
+    .login-wrapper .form-control:-ms-input-placeholder {
+        color: #ff5f63;
+    }
+
+    .login-wrapper .form-control::placeholder {
+        color: #ff5f63;
+    }
+
+.login-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.login-btn {
+    padding: 13px 30px;
+    background-color: #ff5f63;
+    border-radius: 0;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 12px;
+    color: #fff;
+
+}
+
+    .login-btn:hover {
+        border: 1px solid #000;
+        background-color: transparent;
+        color: #000;
+    }

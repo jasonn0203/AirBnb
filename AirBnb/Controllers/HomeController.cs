@@ -14,6 +14,19 @@ namespace AirBnb.Controllers
             return View();
         }
 
-  
+        public ActionResult AirCover()
+        {
+            return View();
+        }
+
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+
+        public ActionResult SignUp()
+        {
+            return View();
+        }
     }
 }

@@ -6,7 +6,7 @@
     <title>@ViewBag.Title</title>
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
+    <link rel="icon" type="image/x-icon" href="~/Assets/Images/airbnb_logo.png">
     <link href="~/Content/Site.css" rel="stylesheet" />
 
 </head>
@@ -15,7 +15,7 @@
     <nav class="body-content navbar navbar-expand-md sticky-md-top py-lg-3 py-2 bg-white border-bottom">
         <div class="container">
             @*LOGO*@
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="@Url.Action("Index","Home")">
                 <img class="airbnb_logo h-100 object-fit-cover" src="~/Assets/Images/airrbnb_logo.png" alt="AirBnb Logo" />
             </a>
 
@@ -49,11 +49,18 @@
 
                 <ul class="dropdown-menu">
                     <li><h5 class="dropdown-header primaryColor border-bottom">Account</h5></li>
-                    <li><a class="dropdown-item mt-2" href="#">Sign Up</a></li>
-                    <li><a class="dropdown-item" href="#">Log In</a></li>
+                    <li>
+                        <a class="dropdown-item mt-2" href="#">Sign Up</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="@Url.Action("SignIn","Home")">Sign In</a>
+                    </li>
                     <li><h5 class="dropdown-header primaryColor border-bottom">Help</h5></li>
-                    <li><a class="dropdown-item " href="#">About AirBnb</a></li>
+                    <li>
+                        <a class="dropdown-item" href="#">About AirBnb</a>
+                    </li>
                 </ul>
+
 
             </div>
 
@@ -125,18 +132,21 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             Airbnb
                         </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Newsroom</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Career</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Gift Cards</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Investors</a>
-                        </p>
+                        <div class="d-flex flex-column row-gap-4">
+                            <p>
+                                <a href="#!" class="text-reset">Newsroom</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Career</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Gift Cards</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Investors</a>
+                            </p>
+                        </div>
+
                     </div>
                     <!-- Grid column -->
                     <!-- Grid column -->
@@ -145,30 +155,36 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             Support
                         </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Help Center</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">AirCover</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Cancellation options</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Cancellation options</a>
-                        </p>
+                        <div class="d-flex flex-column row-gap-4">
+
+                            <p>
+                                <a href="#!" class="text-reset">Help Center</a>
+                            </p>
+                            <p>
+                                <a href="@Url.Action("AirCover","Home")" class="text-reset">AirCover</a>
+                            </p>
+                            <p>
+                                <a href="#!" class="text-reset">Cancellation options</a>
+                            </p>
+                        </div>
+
+
                     </div>
                     <!-- Grid column -->
                     <!-- Grid column -->
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M0 0h24v24H0z" /><path fill="#ff5f63" d="M20.891 2.006L20.997 2l.13.008l.09.016l.123.035l.107.046l.1.057l.09.067l.082.075l.052.059l.082.116l.052.096c.047.1.077.206.09.316l.005.106c0 .075-.008.149-.024.22l-.035.123l-6.532 18.077A1.55 1.55 0 0 1 14 22.32a1.547 1.547 0 0 1-1.329-.747l-.065-.127l-3.352-6.702l-6.67-3.336a1.55 1.55 0 0 1-.898-1.259L1.68 10c0-.56.301-1.072.841-1.37l.14-.07l18.017-6.506l.106-.03l.108-.018z" /></g></svg> Đại Học Ngoại Ngữ - Tin Học TP.HCM</p>
-                        <p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path d="M480 253C478.3 129.3 376.7 30.4 253 32S30.4 135.3 32 259c1.7 123.7 103.3 222.6 227 221 123.7-1.7 222.7-103.3 221-227zM256 111.9c17.7 0 32 14.3 32 32s-14.3 32-32 32-32-14.3-32-32 14.3-32 32-32zM300 395h-88v-11h22V224h-22v-12h66v172h22v11z" fill="#ff5f63" /></svg> info@example.com
-                        </p>
-                        <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ff5f63" d="M18.95 22q-3.225 0-6.288-1.438t-5.425-3.8q-2.362-2.362-3.8-5.425T2 5.05q0-.45.3-.75t.75-.3H7.1q.35 0 .625.225t.325.575l.65 3.5q.05.35-.013.638T8.4 9.45L6 11.9q1.05 1.8 2.625 3.375T12.1 18l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.075.575.338T20 16.9v4.05q0 .45-.3.75t-.75.3ZM17 12q-2.075 0-3.538-1.463T12 7q0-2.075 1.463-3.538T17 2q2.075 0 3.538 1.463T22 7q0 2.075-1.463 3.538T17 12Zm-.5-2h1V6h-1v4Zm.5-5q.2 0 .35-.15t.15-.35q0-.2-.15-.35T17 4q-.2 0-.35.15t-.15.35q0 .2.15.35T17 5Z" /></svg> + 01 234 567 88</p>
-                        <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ff5f63" d="M18.95 22q-3.225 0-6.288-1.438t-5.425-3.8q-2.362-2.362-3.8-5.425T2 5.05q0-.45.3-.75t.75-.3H7.1q.35 0 .625.225t.325.575l.65 3.5q.05.35-.013.638T8.4 9.45L6 11.9q1.05 1.8 2.625 3.375T12.1 18l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.075.575.338T20 16.9v4.05q0 .45-.3.75t-.75.3ZM17 12q-2.075 0-3.538-1.463T12 7q0-2.075 1.463-3.538T17 2q2.075 0 3.538 1.463T22 7q0 2.075-1.463 3.538T17 12Zm-.5-2h1V6h-1v4Zm.5-5q.2 0 .35-.15t.15-.35q0-.2-.15-.35T17 4q-.2 0-.35.15t-.15.35q0 .2.15.35T17 5Z" /></svg> + 01 234 567 89</p>
+                        <div class="d-flex flex-column row-gap-4">
+
+                            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M0 0h24v24H0z" /><path fill="#ff5f63" d="M20.891 2.006L20.997 2l.13.008l.09.016l.123.035l.107.046l.1.057l.09.067l.082.075l.052.059l.082.116l.052.096c.047.1.077.206.09.316l.005.106c0 .075-.008.149-.024.22l-.035.123l-6.532 18.077A1.55 1.55 0 0 1 14 22.32a1.547 1.547 0 0 1-1.329-.747l-.065-.127l-3.352-6.702l-6.67-3.336a1.55 1.55 0 0 1-.898-1.259L1.68 10c0-.56.301-1.072.841-1.37l.14-.07l18.017-6.506l.106-.03l.108-.018z" /></g></svg> Đại Học Ngoại Ngữ - Tin Học TP.HCM</p>
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path d="M480 253C478.3 129.3 376.7 30.4 253 32S30.4 135.3 32 259c1.7 123.7 103.3 222.6 227 221 123.7-1.7 222.7-103.3 221-227zM256 111.9c17.7 0 32 14.3 32 32s-14.3 32-32 32-32-14.3-32-32 14.3-32 32-32zM300 395h-88v-11h22V224h-22v-12h66v172h22v11z" fill="#ff5f63" /></svg> info@example.com
+                            </p>
+                            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ff5f63" d="M18.95 22q-3.225 0-6.288-1.438t-5.425-3.8q-2.362-2.362-3.8-5.425T2 5.05q0-.45.3-.75t.75-.3H7.1q.35 0 .625.225t.325.575l.65 3.5q.05.35-.013.638T8.4 9.45L6 11.9q1.05 1.8 2.625 3.375T12.1 18l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.075.575.338T20 16.9v4.05q0 .45-.3.75t-.75.3ZM17 12q-2.075 0-3.538-1.463T12 7q0-2.075 1.463-3.538T17 2q2.075 0 3.538 1.463T22 7q0 2.075-1.463 3.538T17 12Zm-.5-2h1V6h-1v4Zm.5-5q.2 0 .35-.15t.15-.35q0-.2-.15-.35T17 4q-.2 0-.35.15t-.15.35q0 .2.15.35T17 5Z" /></svg> + 01 234 567 88</p>
+                            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ff5f63" d="M18.95 22q-3.225 0-6.288-1.438t-5.425-3.8q-2.362-2.362-3.8-5.425T2 5.05q0-.45.3-.75t.75-.3H7.1q.35 0 .625.225t.325.575l.65 3.5q.05.35-.013.638T8.4 9.45L6 11.9q1.05 1.8 2.625 3.375T12.1 18l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.075.575.338T20 16.9v4.05q0 .45-.3.75t-.75.3ZM17 12q-2.075 0-3.538-1.463T12 7q0-2.075 1.463-3.538T17 2q2.075 0 3.538 1.463T22 7q0 2.075-1.463 3.538T17 12Zm-.5-2h1V6h-1v4Zm.5-5q.2 0 .35-.15t.15-.35q0-.2-.15-.35T17 4q-.2 0-.35.15t-.15.35q0 .2.15.35T17 5Z" /></svg> + 01 234 567 89</p>
+                        </div>
+
                     </div>
                     <!-- Grid column -->
                 </div>
@@ -190,7 +206,11 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Assets/Scripts/app.js"></script>
+
+
+
     <script src="https://unpkg.com/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 

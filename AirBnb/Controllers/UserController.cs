@@ -18,5 +18,10 @@ namespace AirBnb.Controllers
         {
             return View();
         }
+
+        public ActionResult PersonalInfo()
+        {
+            return View();
+        }
     }
 }
