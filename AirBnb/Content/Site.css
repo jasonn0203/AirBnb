@@ -99,6 +99,7 @@ p {
 .dropdown-menu.show {
     min-width: 160px;
     margin-top: 6px;
+
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -173,6 +174,8 @@ carousel-inner {
     outline: none;
     border: none;
     cursor: pointer;
+    display:block;
+    margin: 0 auto;
 }
 
 .placeList {
@@ -532,8 +535,7 @@ carousel-inner {
     align-items: center;
 }
 
-label {
-    width: 250px;
+.heart_label {
     background-color: white;
     display: -webkit-box;
     display: -webkit-flex;
