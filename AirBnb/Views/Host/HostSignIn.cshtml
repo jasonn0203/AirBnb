@@ -1,15 +1,17 @@
 ﻿
 @{
-    ViewBag.Title = "SignIn";
+    ViewBag.Title = "HostSignIn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <div class="container-fluid my-5 rounded-4 overflow-hidden shadow">
     <div class="row">
-        <div class="col-sm-6 col-md-7 intro-section">
+        <div class="col-sm-6 col-md-7 intro-section-host">
             <div class="brand-wrapper">
 
-                <h1 class="intro-title text-center text-white fs-2">Welcome back to Airbnb !</h1>
+                <h1 class="intro-title text-center text-white fs-2">Host Your Room</h1>
             </div>
 
 
@@ -32,9 +34,8 @@
 
                     </div>
                 </form>
-                <p class="login-wrapper-footer-text">Need an account?  <a href="@Url.Action("SignUp","Home")" class=" text-primary"> Signup here</a></p>
+                <p class="login-wrapper-footer-text">Need an account? <a href="@Url.Action("HostSignUp","Host")" class="text-reset">Signup here</a></p>
             </div>
         </div>
     </div>
 </div>
-
