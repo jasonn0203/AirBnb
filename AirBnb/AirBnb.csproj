@@ -49,10 +49,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -132,6 +140,51 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Airbnb_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Airbnb_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Airbnb_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Airbnb_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Airbnb_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChuNha.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DanhGia.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DanhMucPhong.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DonDatPhong.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HinhAnh.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HoaDon.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhachThue.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhuyenMai.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Phong.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YeuThich.cs">
+      <DependentUpon>Airbnb_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +234,16 @@
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
+    <Content Include="Models\Airbnb_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Airbnb_Model.Context.cs</LastGenOutput>
+      <DependentUpon>Airbnb_Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Airbnb_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Airbnb_Model.edmx</DependentUpon>
+      <LastGenOutput>Airbnb_Model.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -203,6 +266,13 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <EntityDeploy Include="Models\Airbnb_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Airbnb_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Airbnb_Model.edmx.diagram">
+      <DependentUpon>Airbnb_Model.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -317,11 +387,12 @@
     <Content Include="Views\Host\HostSignUp.cshtml" />
     <Content Include="Views\Host\HostSignIn.cshtml" />
     <Content Include="Views\Shared\_HostLayout.cshtml" />
+    <Content Include="Views\Home\GetCategories.cshtml" />
+    <Content Include="Views\Shared\UserPanel.cshtml" />
     <Content Include="Views\Host\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -333,6 +404,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

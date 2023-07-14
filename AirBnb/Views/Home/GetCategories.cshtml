@@ -1,0 +1,58 @@
+﻿@using AirBnb.Models;
+
+
+<div class="d-flex justify-content-center w-100 h-100 align-items-center my-4">
+    <div class="w-75">
+        <div id="carouselExampleControls" class="carousel slide">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+
+                    <div class="row  row-gap-lg-4">
+                        @foreach (var danhMucPhong in Model)
+                        {
+                            <div class="d-flex flex-column col-lg-2 col-md-4 placeView align-items-center justify-content-center">
+                                <i class="fa fa-@danhMucPhong.Icon"></i>
+                                <span>@danhMucPhong.TenDanhMuc</span>
+                            </div>
+
+                        }
+                    </div>
+
+
+                </div>
+
+                <div class="carousel-item">
+
+                    <div class="row row-gap-2 row-gap-lg-4">
+                        @foreach (var danhMucPhong in Model)
+                        {
+                            <div class="d-flex flex-column col-lg-2 col-md-4 placeView align-items-center justify-content-center">
+                                <i class="fa fa-@danhMucPhong.Icon"></i>
+                                <span>@danhMucPhong.TenDanhMuc</span>
+                            </div>
+
+                        }
+                    </div>
+
+
+                </div>
+
+            </div>
+            <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <svg class="carousel-control-prev-icon" aria-hidden="true"
+                     xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="#ff5f63" d="m11 18l-6-6l6-6l1.4 1.4L7.825 12l4.575 4.6L11 18Zm6.6 0l-6-6l6-6L19 7.4L14.425 12L19 16.6L17.6 18Z" />
+                </svg>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <svg class="carousel-control-next-icon" aria-hidden="true"
+                     xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="#ff5f63" d="M6.4 18L5 16.6L9.575 12L5 7.4L6.4 6l6 6l-6 6Zm6.6 0l-1.4-1.4l4.575-4.6L11.6 7.4L13 6l6 6l-6 6Z" />
+                </svg>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
