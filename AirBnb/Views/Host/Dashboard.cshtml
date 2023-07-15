@@ -4,8 +4,9 @@
     Layout = "~/Views/Shared/_HostLayout.cshtml";
 }
 
+      
 
-<main class="dash-content">
+          <main class="dash-content">
     <div class="container-fluid">
         <div class="row dash-row">
             <div class="col-xl-4">
@@ -80,29 +81,31 @@
                         <canvas id="easionChartjsBar"></canvas>
                         <script>
                                         var ctx = document.getElementById("easionChartjsBar").getContext('2d');
-                                        var myChart = new Chart(ctx, {
-                                            type: 'bar',
-                                            data: {
-                                                labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                                                datasets: [{
+            var myChart = new Chart(ctx, {
+
+                type: 'bar',
+                data: {
+
+                    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                    datasets: [{
                                                     label: 'Blue',
-                                                    data: [12, 19, 3, 5, 2],
-                                                    backgroundColor: window.chartColors.primary,
-                                                    borderColor: 'transparent'
+                        data: [12, 19, 3, 5, 2],
+                        backgroundColor: window.chartColors.primary,
+                        borderColor: 'transparent'
                                                 }]
                                             },
                                             options: {
-                                                legend: {
-                                                    display: false
+    legend: {
+        display: false
                                                 },
                                                 scales: {
-                                                    yAxes: [{
-                                                        ticks: {
-                                                            beginAtZero: true
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
                                                         }
-                                                    }]
+            }]
                                                 }
-                                            }
+    }
                                         });</script>
                     </div>
                 </div>
