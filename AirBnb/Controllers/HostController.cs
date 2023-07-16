@@ -155,8 +155,10 @@ namespace AirBnb.Controllers
         {
             Session.Clear();
             Session.Abandon();
+            Session["ChuNha"] = null;
 
-            
+
+
             return RedirectToAction("HostSignIn", "Host");
         }
 
@@ -173,5 +175,74 @@ namespace AirBnb.Controllers
             }
             return View();
         }
+
+        public ActionResult RoomManagement()
+        {
+            //Check chủ nhà có đăng nhập chưa , nếu chưa chuyển về trang đăng nhập
+            if (Session["ChuNha"] == null)
+            {
+                return RedirectToAction("HostSignIn");
+            }
+            return View();
+
+            // Lấy mã chủ nhà từ session
+            var maChuNha = ((ChuNha)Session["ChuNha"]).MaChuNha;
+
+            // Lấy danh sách các phòng thuộc mã chủ nhà
+            List<Phong> phongList = db.Phongs.Where(p => p.MaChuNha == maChuNha).ToList();
+
+            if (phongList == null || phongList.Count == 0)
+            {
+                ViewBag.Message = "No Room was found! Please add a new one.";
+                return View();
+            }
+            return View(phongList);
+        }
+
+        //------------------------------------------------------------------
+        //Thêm xóa sửa phòng
+        public ActionResult CreateRoom()
+        {
+            // Logic để lấy danh sách danh mục phòng, khuyến mãi (để hiển thị cho form thêm phòng)
+
+
+            //List<DanhMucPhong> danhMucList = db.DanhMucPhongs.ToList();
+            //List<KhuyenMai> khuyenMaiList = db.KhuyenMais.ToList();
+
+            ViewBag.MaDanhMuc = new SelectList(db.DanhMucPhongs, "MaDanhMuc", "TenDanhMuc");
+            ViewBag.MaKM = new SelectList(db.KhuyenMais, "MaKM", "TenKM");
+
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRoom([Bind(Include = "TieuDe, DiaChi, MoTa, Gia1Ngay, DieuKhoan, SLKhach, NgayBatDau, NgayKetThuc, MaDanhMuc, MaKM, HinhAnh1,HinhAnh2,HinhAnh3,HinhAnh4,HinhAnh5, TinhTrang")] Phong phong)
+        {
+            if (ModelState.IsValid)
+            {
+                // Lấy đối tượng ChuNha từ session
+                var chuNha = (ChuNha)Session["ChuNha"];
+
+                // Gán MaChuNha từ đối tượng chuNha vào phong
+                phong.MaChuNha = chuNha.MaChuNha;
+
+
+
+
+                // Thực hiện lưu thông tin phòng vào cơ sở dữ liệu
+                db.Phongs.Add(phong);
+                db.SaveChanges();
+
+                return RedirectToAction("RoomManagement");
+            }
+
+            ViewBag.MaDanhMuc = new SelectList(db.DanhMucPhongs, "MaDanhMuc", "TenDanhMuc", phong.MaDanhMuc);
+            ViewBag.MaKM = new SelectList(db.KhuyenMais, "MaKM", "TenKM", phong.MaKM);
+            // Nếu dữ liệu không hợp lệ, quay trở lại view create để hiển thị lỗi
+            return View(phong);
+        }
+
     }
 }

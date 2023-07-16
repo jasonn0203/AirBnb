@@ -33,10 +33,14 @@ namespace AirBnb.Models
         public System.DateTime NgayBatDau { get; set; }
         public System.DateTime NgayKetThuc { get; set; }
         public Nullable<int> SoNgayO { get; set; }
+        public string HinhAnh1 { get; set; }
+        public string HinhAnh2 { get; set; }
+        public string HinhAnh3 { get; set; }
+        public string HinhAnh4 { get; set; }
+        public string HinhAnh5 { get; set; }
         public int MaDanhMuc { get; set; }
         public int MaChuNha { get; set; }
-        public int MaKM { get; set; }
-        public int MaHinhAnh { get; set; }
+        public Nullable<int> MaKM { get; set; }
     
         public virtual ChuNha ChuNha { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,7 +48,6 @@ namespace AirBnb.Models
         public virtual DanhMucPhong DanhMucPhong { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DonDatPhong> DonDatPhongs { get; set; }
-        public virtual HinhAnh HinhAnh { get; set; }
         public virtual KhuyenMai KhuyenMai { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<YeuThich> YeuThiches { get; set; }

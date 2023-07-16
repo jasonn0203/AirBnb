@@ -29,7 +29,6 @@ namespace AirBnb.Models
         public virtual DbSet<DanhGia> DanhGias { get; set; }
         public virtual DbSet<DanhMucPhong> DanhMucPhongs { get; set; }
         public virtual DbSet<DonDatPhong> DonDatPhongs { get; set; }
-        public virtual DbSet<HinhAnh> HinhAnhs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<KhachThue> KhachThues { get; set; }
         public virtual DbSet<KhuyenMai> KhuyenMais { get; set; }

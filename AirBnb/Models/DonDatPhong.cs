@@ -25,7 +25,7 @@ namespace AirBnb.Models
         public decimal TongChiPhi { get; set; }
         public int MaPhong { get; set; }
         public int MaKH { get; set; }
-        public int SoNgayThue { get; set; }
+        public Nullable<int> SoNgayThue { get; set; }
     
         public virtual Phong Phong { get; set; }
         public virtual KhachThue KhachThue { get; set; }
