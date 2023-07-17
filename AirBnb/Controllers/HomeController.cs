@@ -18,12 +18,38 @@ namespace AirBnb.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //Hiển thị danh sách các phòng
+            // Lấy tất cả danh sách phòng
             List<Phong> phongList = db.Phongs.ToList();
             return View(phongList);
         }
 
+
+
+        public ActionResult RoomByCategory(string categoryName)
+        {
+            var danhMucPhong = db.DanhMucPhongs.FirstOrDefault(d => d.TenDanhMuc == categoryName);
+            if (danhMucPhong == null)
+            {
+                return View("Index");
+            }
+
+            var roomItemByCategoryList = db.Phongs.Where(product => product.MaDanhMuc == danhMucPhong.MaDanhMuc).ToList();
+            if (roomItemByCategoryList.Count == 0)
+            {
+                return RedirectToAction("NotFound");
+            }
+
+            return View("Index", roomItemByCategoryList);
+        }
+
+
+
         public ActionResult AirCover()
+        {
+            return View();
+        }
+
+        public ActionResult NotFound()
         {
             return View();
         }

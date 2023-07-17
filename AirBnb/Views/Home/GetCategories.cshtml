@@ -7,32 +7,33 @@
             <div class="carousel-inner">
 
                 <div class="carousel-item active">
-
-                    <div class="row  row-gap-lg-4">
+                    <div class="row row-gap-lg-4">
                         @foreach (var danhMucPhong in Model)
                         {
-                            <div class="d-flex flex-column col-lg-2 col-md-4 placeView align-items-center justify-content-center">
+                            <a style="color: black;" href="@Url.Action("RoomByCategory", "Home", new { categoryName = danhMucPhong.TenDanhMuc })" class="d-flex flex-column col-lg-2 col-md-4 placeView align-items-center justify-content-center">
                                 <i class="fa fa-@danhMucPhong.Icon"></i>
                                 <span>@danhMucPhong.TenDanhMuc</span>
-                            </div>
+                            </a>
 
                         }
                     </div>
-
-
                 </div>
+
 
                 <div class="carousel-item">
 
                     <div class="row row-gap-2 row-gap-lg-4">
                         @foreach (var danhMucPhong in Model)
                         {
-                            <div class="d-flex flex-column col-lg-2 col-md-4 placeView align-items-center justify-content-center">
+
+                            <a style="color: black;" href="@Url.Action("RoomByCategory", "Home", new { categoryName = danhMucPhong.TenDanhMuc })" class="d-flex flex-column col-lg-2 col-md-4 placeView align-items-center justify-content-center">
                                 <i class="fa fa-@danhMucPhong.Icon"></i>
                                 <span>@danhMucPhong.TenDanhMuc</span>
-                            </div>
+                            </a>
+
 
                         }
+
                     </div>
 
 

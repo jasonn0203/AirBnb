@@ -307,31 +307,20 @@ namespace AirBnb.Controllers
         }
 
         //---------------------------------------------------
-        public ActionResult DeleteRoom(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteRoom(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-
             Phong room = db.Phongs.Find(id);
             if (room == null)
             {
                 return HttpNotFound();
             }
-
-            return View(room);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Phong room = db.Phongs.Find(id);
             db.Phongs.Remove(room);
             db.SaveChanges();
             return RedirectToAction("RoomManagement");
         }
+
 
     }
 }

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "NotFound";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="not-found">
+
+    <div class="circles">
+        <p>
+            <span class="primaryColor">404</span><br>
+            <small class="primaryColor">PAGE NOT FOUND</small>
+        </p>
+        <span class="circle big"></span>
+        <span class="circle med"></span>
+        <span class="circle small"></span>
+
+    </div>
+
+    <div style="background-color: #FF5F63" class="d-flex align-items-center justify-content-center p-4  my-2 btn">
+    <a style="color:white" href="@Url.Action("Index", "Home")">Back to Home Page</a>
+
+    </div>
+
+
+</section>
+

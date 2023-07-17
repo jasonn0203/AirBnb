@@ -12,6 +12,8 @@ namespace AirBnb.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class AirbnbEntities : DbContext
     {
@@ -34,5 +36,10 @@ namespace AirBnb.Models
         public virtual DbSet<KhuyenMai> KhuyenMais { get; set; }
         public virtual DbSet<Phong> Phongs { get; set; }
         public virtual DbSet<YeuThich> YeuThiches { get; set; }
+    
+        public virtual int UpdateGia1Ngay()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateGia1Ngay");
+        }
     }
 }

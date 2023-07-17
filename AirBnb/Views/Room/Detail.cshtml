@@ -1,4 +1,4 @@
-﻿
+﻿@using AirBnb.Models;
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,21 +6,21 @@
 
 <main class="my-4">
     <section>
-        <h2>Sai Gon, Vietnam</h2>
+        <h2>@Model.TieuDe</h2>
         <div class=" d-flex justify-content-between">
             @*Host name*@
             <div class="d-flex flex-md-row flex-column gap-4">
 
                 <div class="d-flex align-items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ff5f63" d="M10 20H6q-.425 0-.713-.288T5 19v-7H3.3q-.35 0-.475-.325t.15-.55l8.35-7.525q.275-.275.675-.275t.675.275L16 6.6V5q0-.425.288-.713T17 4h1q.425 0 .713.288T19 5v4.3l2.025 1.825q.275.225.15.55T20.7 12H19v7q0 .425-.288.713T18 20h-4v-5q0-.425-.288-.713T13 14h-2q-.425 0-.713.288T10 15v5Zm0-9.975h4q0-.8-.6-1.313T12 8.2q-.8 0-1.4.513t-.6 1.312Z" /></svg>
-                    <p>Huynh Nhat Quan</p>
+                    <p>@Model.ChuNha.Ten</p>
                 </div>
 
 
                 <div class="d-flex align-items-center gap-1 ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ff5f63" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7s7 3.13 7 7s-3.13 7-7 7z" /></svg>
                     <p>
-                        Gyeongju-si, North Gyeongsang Province, South Korea
+                        @Model.DiaChi
                     </p>
                 </div>
 
@@ -57,27 +57,27 @@
     <section class="mx-auto my-5 ">
         <div class="d-flex gap-3 flex-wrap mx-auto mx-md-0 justify-content-center ">
             <div class=" room-grid">
-                <img width="550" height="400" class="object-fit-cover" src="~/Assets/Images/room_2.jpg" alt="1" />
+                <img width="550" height="400" class="object-fit-cover" src="@Model.HinhAnh1" alt="1" />
             </div>
             <div class="d-flex gap-4 overflow-hidden"
                  style="border-top-right-radius: 40px; border-bottom-right-radius: 40px;">
                 <div class="d-flex flex-column row-gap-1">
                     <div class="">
-                        <img class="object-fit-cover mini-room-image" src="~/Assets/Images/room_1.jpg" alt="1" />
+                        <img class="object-fit-cover mini-room-image" src="@Model.HinhAnh2" alt="1" />
                     </div>
 
                     <div class="">
-                        <img class="object-fit-cover mini-room-image" src="~/Assets/Images/room_2.jpg" alt="1" />
+                        <img class="object-fit-cover mini-room-image" src="@Model.HinhAnh3" alt="1" />
                     </div>
                 </div>
 
                 <div class="d-flex flex-column row-gap-1">
                     <div class="">
-                        <img class="object-fit-cover mini-room-image " src="~/Assets/Images/room_3.jpg" alt="1" />
+                        <img class="object-fit-cover mini-room-image " src="@Model.HinhAnh4" alt="1" />
                     </div>
 
                     <div class="">
-                        <img class="object-fit-cover mini-room-image" src="~/Assets/Images/room_4.jpg" alt="1" />
+                        <img class="object-fit-cover mini-room-image" src="@Model.HinhAnh5" alt="1" />
                     </div>
                 </div>
 
@@ -99,27 +99,23 @@
                 <div class="d-flex align-items-center justify-content-between bg-body py-4 border-custom-bottom">
                     <div class="d-flex flex-column ">
                         <p class="fw-bold fs-4">
-                            House hosted by JASON
+                            House hosted by @Model.ChuNha.Ten
                         </p>
                         <p class="text-black-50">
-                            3 guests - 1 bedroom - 1 bed - 1 bath
+                            @Model.SLKhach guests - 1 bedroom - 1 bed - 1 bath
                         </p>
                     </div>
-                    <a href="@Url.Action("About","User")">
-                        <img width="55" height="55" class="object-fit-cover rounded-circle" src="~/Assets/Images/quan.png" alt="Alternate Text" />
+                    <a href="@Url.Action("About", "User", new { hostName = Model.ChuNha.Ten })">
+                        <img width="55" height="55" class="object-fit-cover rounded-circle" src="~/Assets/Images/no-avatar.png" alt="Alternate Text" />
                     </a>
+
                 </div>
 
 
                 @*Description*@
                 <div class="py-3">
                     <p class="text-description ">
-                        Located in the Bomun Tourist Complex in Gyeongju, at the end of the road, 7 minutes by car from Bomun Complex, 5 minutes from Bumun Temple, Gyeongju's downtown area, and about 20 minutes to Yangnam and Gampo (sea area station), our accommodation is located in a good area to travel.
-
-                        Lazy House is a warm wooden house that is a great space for couples to use. You can see Mt. Tohamsan in the emotional room:)
-
-                        Enjoy barbecue and relaxation on the private terrace looking at the yard:)
-
+                        @Model.MoTa
 
                     </p>
                 </div>
@@ -221,30 +217,30 @@
             @*Remember to put it in Form*@
             <div class="col-lg-4 p-4 room-checkout position-relative mx-auto  ">
                 <div class="d-flex justify-content-between">
-                    <span class="fw-bolder fs-3">
-                        150$
-                        <span class="fw-normal fs-5">night</span>
+                    <span class="fw-bolder fs-3 ">
+                        <span class="primaryColor">$@Model.Gia1Ngay.ToString("0")</span>
+                        <span class="fw-lighter fs-5 ">night</span>
                     </span>
                 </div>
-                <div>Guest :</div>
 
+                <div class="my-2">Guest:</div>
                 <div class="input-group my-2">
                     <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
                         <option selected>Select ..</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-
+                        @for (int i = 1; i <= Model.SLKhach; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
                     </select>
-
                 </div>
+
 
                 @*Date Picker*@
 
 
                 <div class="d-flex justify-content-between column-gap-2 my-3">
-                    <input placeholder="Start Date" type="date" id="start" name="start" value="2023-06-11" min="2023-06-11" max="2023-06-13" />
-                    <input placeholder="End Date" type="date" id="end" name="end" value="2023-06-13" min="2023-06-11" max="2023-06-13" />
+                    <input placeholder="Start Date" type="date" id="start" name="start" value="@Model.NgayBatDau" min="@Model.NgayBatDau + 1" max="@Model.NgayKetThuc" />
+                    <input placeholder="End Date" type="date" id="end" name="end" value="@Model.NgayKetThuc" min="@Model.NgayKetThuc" max="@Model.NgayKetThuc" />
                 </div>
 
 
@@ -267,7 +263,7 @@
 
                     @*TOTAL FEE*@
                     <div class="d-flex justify-content-between pt-2 text-black-50 ">
-                        <p class="fw-bold fs-4">Total Fee</p>
+                        <p class="fw-bold fs-4 primaryColor">Total Fee</p>
                         <p class=" fw-bold primaryColor fs-4">154$</p>
                     </div>
 

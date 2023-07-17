@@ -160,7 +160,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.MaKM, "MaKM", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.DropDownList("MaKM", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("MaKM", ViewBag.MaKM as SelectList, "-- Select KM --", htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.MaKM, "", new { @class = "text-danger" })
                         </div>
                     </div>

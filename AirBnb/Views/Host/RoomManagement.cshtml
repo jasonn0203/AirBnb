@@ -32,8 +32,28 @@
                 <div href="#" class="placeFrame">
                     <div class="d-flex align-items-center justify-content-center gap-4">
                         @Html.ActionLink("Edit", "EditRoom", new { id = item.MaPhong }, new { @class = "text-danger" })
-                        @Html.ActionLink("Details", "Details", new { id = item.MaPhong }, new { @class = "text-danger" })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.MaPhong }, new { @class = "text-danger" })
+                        @*@Html.ActionLink("Details", "Details", new { id = item.MaPhong }, new { @class = "text-danger" })*@
+                      
+
+                        <button class="btn btn-danger" onclick="showDeleteConfirmation(@item.MaPhong)">Delete</button>
+
+                        <div id="deleteConfirmationModal" class="modal">
+                            <div class="modal-overlay"></div>
+                            <div class="modal-content">
+                                <h3>Confirm Delete</h3>
+                                <p>Are you sure you want to delete this room?</p>
+
+                                <form method="post" action="@Url.Action("DeleteRoom", "Host", new { id = item.MaPhong })">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+
+                                <button class="btn btn-secondary" onclick="closeDeleteConfirmation()">Cancel</button>
+                            </div>
+                        </div>
+
+
+
                     </div>
                     <div class="slider-frame mx-auto mx-md-0">
 
@@ -69,3 +89,24 @@
 
     }
 </div>
+
+
+<script>
+    var roomIdToDelete = 0;
+
+    function showDeleteConfirmation(roomId) {
+        roomIdToDelete = roomId;
+        var modal = document.getElementById("deleteConfirmationModal");
+        modal.style.display = "block";
+    }
+
+    function closeDeleteConfirmation() {
+        var modal = document.getElementById("deleteConfirmationModal");
+        modal.style.display = "none";
+        console.log("click");
+    }
+
+
+
+
+</script>

@@ -8,9 +8,13 @@
 <main>
 
     @*Slider place view filter*@
-    @*@Html.Partial("PlaceFilterCarousel")*@
-
     @Html.Action("GetCategories", "Home")
+
+
+
+
+    @* PRICE SLIDER *@
+
 
 
 
@@ -22,21 +26,19 @@
 
             <ul class="content__container__list">
                 <li class="content__container__list__item primaryColor">Choices !</li>
-                <li class="content__container__list__item primaryColor">Styles !</li>
+                <li class="content__container__list__item primaryColor">Joys !</li>
             </ul>
         </div>
     </div>
 
 
-    @* PRICE SLIDER *@
 
 
-
-    <div class="placeList">
+    <div class="placeList my-4">
         @foreach (var item in Model)
         {
 
-            <a href=" @Url.Action("Detail", "Room")" class="placeFrame">
+            <a href=" @Url.Action("Detail", "Room", new {id = item.MaPhong})" class="placeFrame ">
                 <div class="slider-frame mx-auto mx-md-0">
                     <div class="slide-images">
                         <div class="img-container">
@@ -51,11 +53,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex mt-2 fw-medium fs-5 text-black">@item.TieuDe</div>
+                <div class="mt-2 fw-medium fs-5 text-black" style="width: 100%;">
 
-                <div class="d-flex TypeAndRating mt-2 text-black-50">
+                    <div class="text-truncate">@item.TieuDe</div>
+                </div>
+
+
+                <div class="d-flex TypeAndRating my-2 text-black-50">
                     <p>@item.DanhMucPhong.TenDanhMuc</p>
-                    <p class="PRating"><i class="fa-solid fa-star"></i> Good</p>
+                    <p class="PRating">
+
+                        @* Hiển thị trạng thái phòng *@
+                        @if (item.TinhTrang)
+                        {
+                            <span class="text-danger ">Booked</span>
+                        }
+                        else
+                        {
+                            <span class="text-success">Available</span>
+                        }
+
+
+                    </p>
                 </div>
 
                 <div class="d-flex text-black">
