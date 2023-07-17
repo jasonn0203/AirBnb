@@ -183,7 +183,7 @@ namespace AirBnb.Controllers
             {
                 return RedirectToAction("HostSignIn");
             }
-            return View();
+
 
             // Lấy mã chủ nhà từ session
             var maChuNha = ((ChuNha)Session["ChuNha"]).MaChuNha;
@@ -242,6 +242,95 @@ namespace AirBnb.Controllers
             ViewBag.MaKM = new SelectList(db.KhuyenMais, "MaKM", "TenKM", phong.MaKM);
             // Nếu dữ liệu không hợp lệ, quay trở lại view create để hiển thị lỗi
             return View(phong);
+        }
+
+        //-----------------------------------------------
+        //Edit
+        public ActionResult EditRoom(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+
+            Phong room = db.Phongs.Find(id);
+            if (room == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            ViewBag.MaDanhMuc = new SelectList(db.DanhMucPhongs, "MaDanhMuc", "TenDanhMuc", room.MaDanhMuc);
+            ViewBag.MaKM = new SelectList(db.KhuyenMais, "MaKM", "TenKM", room.MaKM);
+            return View(room);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditRoom([Bind(Include = "MaPhong, TieuDe, DiaChi, MoTa, Gia1Ngay, DieuKhoan, SLKhach, NgayBatDau, NgayKetThuc, MaDanhMuc, MaKM, HinhAnh1, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5, TinhTrang")] Phong phong)
+        {
+            if (ModelState.IsValid)
+            {
+                var getRoomInDb = db.Phongs.Find(phong.MaPhong);
+
+                if (getRoomInDb == null)
+                {
+                    return HttpNotFound(); // Hoặc xử lý lỗi theo cách khác
+                }
+
+                // Cập nhật các thuộc tính của getRoomInDb từ phong
+                getRoomInDb.TieuDe = phong.TieuDe;
+                getRoomInDb.DiaChi = phong.DiaChi;
+                getRoomInDb.MoTa = phong.MoTa;
+                getRoomInDb.Gia1Ngay = phong.Gia1Ngay;
+                getRoomInDb.DieuKhoan = phong.DieuKhoan;
+                getRoomInDb.SLKhach = phong.SLKhach;
+                getRoomInDb.NgayBatDau = phong.NgayBatDau;
+                getRoomInDb.NgayKetThuc = phong.NgayKetThuc;
+                getRoomInDb.MaDanhMuc = phong.MaDanhMuc;
+                getRoomInDb.MaKM = phong.MaKM;
+                getRoomInDb.HinhAnh1 = phong.HinhAnh1;
+                getRoomInDb.HinhAnh2 = phong.HinhAnh2;
+                getRoomInDb.HinhAnh3 = phong.HinhAnh3;
+                getRoomInDb.HinhAnh4 = phong.HinhAnh4;
+                getRoomInDb.HinhAnh5 = phong.HinhAnh5;
+                getRoomInDb.TinhTrang = phong.TinhTrang;
+
+                db.SaveChanges();
+                return RedirectToAction("RoomManagement");
+            }
+
+            ViewBag.MaDanhMuc = new SelectList(db.DanhMucPhongs, "MaDanhMuc", "TenDanhMuc", phong.MaDanhMuc);
+            ViewBag.MaKM = new SelectList(db.KhuyenMais, "MaKM", "TenKM", phong.MaKM);
+
+            return View(phong);
+        }
+
+        //---------------------------------------------------
+        public ActionResult DeleteRoom(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+
+            Phong room = db.Phongs.Find(id);
+            if (room == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(room);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Phong room = db.Phongs.Find(id);
+            db.Phongs.Remove(room);
+            db.SaveChanges();
+            return RedirectToAction("RoomManagement");
         }
 
     }

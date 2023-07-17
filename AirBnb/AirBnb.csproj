@@ -390,6 +390,7 @@
     <Content Include="Views\Host\Dashboard.cshtml" />
     <Content Include="Views\Host\RoomManagement.cshtml" />
     <Content Include="Views\Host\CreateRoom.cshtml" />
+    <Content Include="Views\Host\EditRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

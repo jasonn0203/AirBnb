@@ -18,7 +18,9 @@ namespace AirBnb.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            //Hiển thị danh sách các phòng
+            List<Phong> phongList = db.Phongs.ToList();
+            return View(phongList);
         }
 
         public ActionResult AirCover()

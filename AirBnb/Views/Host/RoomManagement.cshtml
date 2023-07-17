@@ -8,9 +8,10 @@
 
 <div class="container-fluid">
 
-    <h2>RoomManagement</h2>
-    <p class="bg-body">
-        @Html.ActionLink("Create New", "CreateRoom")
+    <h2 class="primaryColor fs-2 fw-bold my-4 text-center">Room Management</h2>
+    <p class="bg-body my-4">
+        @Html.ActionLink("Create New", "CreateRoom", null, new { @class = "text-white fs-5 fw-bold bg-primary p-2 rounded-2" })
+        <hr class="primaryColor opacity-100" />
     </p>
 
     @if (ViewBag.Message != null)
@@ -23,78 +24,46 @@
     }
     else
     {
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TieuDe)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DiaChi)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MoTa)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Gia1Ngay)
-                </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.NgayBatDau)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NgayKetThuc)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.DanhMucPhong.TenDanhMuc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HinhAnh1)
-                </th>
-
-                <th></th>
-            </tr>
-
+        <div class="placeList">
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TieuDe)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DiaChi)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MoTa)
-                    </td>
-                    <td>
-                        $@item.Gia1Ngay.ToString("0")
-                    </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NgayBatDau)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NgayKetThuc)
-                    </td>
+                <div href="#" class="placeFrame">
+                    <div class="d-flex align-items-center justify-content-center gap-4">
+                        @Html.ActionLink("Edit", "EditRoom", new { id = item.MaPhong }, new { @class = "text-danger" })
+                        @Html.ActionLink("Details", "Details", new { id = item.MaPhong }, new { @class = "text-danger" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MaPhong }, new { @class = "text-danger" })
+                    </div>
+                    <div class="slider-frame mx-auto mx-md-0">
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DanhMucPhong.TenDanhMuc)
-                    </td>
-                    <td>
-                       <img style="width:50px;height:50px;" src="@item.HinhAnh1" />
-                    </td>
+                        <div class="">
+                            <img src="@item.HinhAnh1" class="img">
+                        </div>
 
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.MaPhong }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.MaPhong }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.MaPhong })
-                    </td>
-                </tr>
+
+                    </div>
+                    <div class="d-flex mt-2 fw-medium fs-5 text-black">@item.TieuDe</div>
+
+                    <div class="d-flex TypeAndRating mt-2 text-black-50">
+                        <p>@item.DanhMucPhong.TenDanhMuc</p>
+                        <p class="PRating"><i class="fa-solid fa-star"></i> Good</p>
+                    </div>
+
+                    <div class="d-flex text-black">
+                        <span class=" fw-bold">
+
+                            $@item.Gia1Ngay.ToString("0")
+                        </span>
+                        <span> / night</span>
+                    </div>
+                </div>
+
+
+
+
             }
-
-        </table>
-
+        </div>
 
 
 
