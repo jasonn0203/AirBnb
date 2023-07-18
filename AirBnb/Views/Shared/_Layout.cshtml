@@ -8,6 +8,7 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="~/Assets/Images/airbnb_logo.png">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
     <link href="~/Content/Site.css" rel="stylesheet" />
 
@@ -25,11 +26,11 @@
 
             @*Search*@
 
-            @using (Html.BeginForm("", "", FormMethod.Post))
+            @using (Html.BeginForm("Search", "Home", FormMethod.Post))
             {
 
                 <div class="d-flex position-relative">
-                    <input class="form-control  py-2 rounded-pill shadow-none " type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control  py-2 rounded-pill shadow-none " name="searchString" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn-search bg-primary d-flex align-items-center justify-content-center  translate-middle-y" type="submit">
 
 
@@ -187,6 +188,7 @@
     <script src="~/Assets/Scripts/app.js"></script>
     <script src="https://kit.fontawesome.com/103727226d.js" crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
 

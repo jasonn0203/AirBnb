@@ -141,6 +141,7 @@ namespace AirBnb.Controllers
             if (host != null)
             {
                 Session["ChuNha"] = host;
+                Session.Timeout = 60;
                 return RedirectToAction("Dashboard");
             }
             else
@@ -173,6 +174,15 @@ namespace AirBnb.Controllers
             {
                 return RedirectToAction("HostSignIn");
             }
+
+            //Lấy số lượng phòng đã đăng
+            var maChuNha = ((ChuNha)Session["ChuNha"]).MaChuNha;
+            int roomQuantity = 0;
+
+            roomQuantity = db.Phongs.Count(r => r.MaChuNha == maChuNha);
+            ViewBag.SoLuongPhong = roomQuantity;
+           
+
             return View();
         }
 

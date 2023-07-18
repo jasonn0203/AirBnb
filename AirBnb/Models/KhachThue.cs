@@ -30,8 +30,8 @@ namespace AirBnb.Models
         public string MatKhau { get; set; }
         public string SDT { get; set; }
         public string SoTK { get; set; }
-        public System.DateTime NgayHH { get; set; }
-        public short CVV { get; set; }
+        public Nullable<System.DateTime> NgayHH { get; set; }
+        public Nullable<short> CVV { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhGia> DanhGias { get; set; }

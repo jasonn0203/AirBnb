@@ -65,9 +65,9 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MatKhau" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="SDT" Type="varchar" MaxLength="11" Nullable="false" />
-          <Property Name="SoTK" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="NgayHH" Type="date" Nullable="false" />
-          <Property Name="CVV" Type="smallint" Nullable="false" />
+          <Property Name="SoTK" Type="varchar" MaxLength="20" />
+          <Property Name="NgayHH" Type="date" />
+          <Property Name="CVV" Type="smallint" />
         </EntityType>
         <EntityType Name="KhuyenMai">
           <Key>
@@ -372,9 +372,9 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MatKhau" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SDT" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SoTK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NgayHH" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CVV" Type="Int16" Nullable="false" />
+          <Property Name="SoTK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NgayHH" Type="DateTime" Precision="0" />
+          <Property Name="CVV" Type="Int16" />
           <NavigationProperty Name="DanhGias" Relationship="Self.FK__DanhGia__MaKH__3A81B327" FromRole="KhachThue" ToRole="DanhGia" />
           <NavigationProperty Name="DonDatPhongs" Relationship="Self.FK__DonDatPhon__MaKH__3E52440B" FromRole="KhachThue" ToRole="DonDatPhong" />
           <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaKH__412EB0B6" FromRole="KhachThue" ToRole="HoaDon" />

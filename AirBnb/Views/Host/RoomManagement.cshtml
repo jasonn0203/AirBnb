@@ -29,55 +29,58 @@
             @foreach (var item in Model)
             {
 
-                <div href="#" class="placeFrame">
-                    <div class="d-flex align-items-center justify-content-center gap-4">
-                        @Html.ActionLink("Edit", "EditRoom", new { id = item.MaPhong }, new { @class = "text-danger" })
-                        @*@Html.ActionLink("Details", "Details", new { id = item.MaPhong }, new { @class = "text-danger" })*@
-                      
+            <div href="#" class="placeFrame">
+                <div class="d-flex align-items-center justify-content-center gap-4">
+                    @Html.ActionLink("Edit", "EditRoom", new { id = item.MaPhong }, new { @class = "text-danger" })
+                    @*@Html.ActionLink("Details", "Details", new { id = item.MaPhong }, new { @class = "text-danger" })*@
 
-                        <button class="btn btn-danger" onclick="showDeleteConfirmation(@item.MaPhong)">Delete</button>
 
-                        <div id="deleteConfirmationModal" class="modal">
-                            <div class="modal-overlay"></div>
-                            <div class="modal-content">
-                                <h3>Confirm Delete</h3>
-                                <p>Are you sure you want to delete this room?</p>
+                    <button class="btn btn-danger" onclick="showDeleteConfirmation(@item.MaPhong)">Delete</button>
 
-                                <form method="post" action="@Url.Action("DeleteRoom", "Host", new { id = item.MaPhong })">
-                                    @Html.AntiForgeryToken()
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                    <div id="deleteConfirmationModal" class="modal">
+                        <div class="modal-overlay"></div>
+                        <div class="modal-content">
+                            <h3>Confirm Delete</h3>
+                            <p>Are you sure you want to delete this room?</p>
 
-                                <button class="btn btn-secondary" onclick="closeDeleteConfirmation()">Cancel</button>
-                            </div>
+                            <form method="post" action="@Url.Action("DeleteRoom", "Host", new { id = item.MaPhong })">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+
+                            <button class="btn btn-secondary" onclick="closeDeleteConfirmation()">Cancel</button>
                         </div>
-
-
-
-                    </div>
-                    <div class="slider-frame mx-auto mx-md-0">
-
-                        <div class="">
-                            <img src="@item.HinhAnh1" class="img">
-                        </div>
-
-
-                    </div>
-                    <div class="d-flex mt-2 fw-medium fs-5 text-black">@item.TieuDe</div>
-
-                    <div class="d-flex TypeAndRating mt-2 text-black-50">
-                        <p>@item.DanhMucPhong.TenDanhMuc</p>
-                        <p class="PRating"><i class="fa-solid fa-star"></i> Good</p>
                     </div>
 
-                    <div class="d-flex text-black">
-                        <span class=" fw-bold">
 
-                            $@item.Gia1Ngay.ToString("0")
-                        </span>
-                        <span> / night</span>
-                    </div>
+
                 </div>
+                <div class="slider-frame mx-auto mx-md-0">
+
+                    <div class="">
+                        <img src="@item.HinhAnh1" class="img">
+                    </div>
+
+
+                </div>
+                <div class="mt-2 fw-medium fs-5 text-black" style="width: 100%;">
+
+                    <div class="text-truncate">@item.TieuDe</div>
+                </div>
+
+                <div class="d-flex TypeAndRating mt-2 text-black-50">
+                    <p>@item.DanhMucPhong.TenDanhMuc</p>
+                    <p class="PRating"><i class="fa-solid fa-star"></i> Good</p>
+                </div>
+
+                <div class="d-flex text-black">
+                    <span class=" fw-bold">
+
+                        $@item.Gia1Ngay.ToString("0")
+                    </span>
+                    <span> / night</span>
+                </div>
+            </div>
 
 
 

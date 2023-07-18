@@ -2018,6 +2018,7 @@ input[type="date"] {
     border: 1px solid #D3D3D3;
     background: #fff;
     margin-bottom: 30px;
+    overflow: hidden;
 }
 
     .easion-card .card-header {
@@ -2087,7 +2088,7 @@ input[type="date"] {
     text-align: center;
     position: relative;
     margin-top: -60px;
-    overflow:hidden;
+    overflow: hidden;
     box-shadow: inset -1px -4px 4px rgba(0,0,0,0.15);
 }
 
