@@ -239,8 +239,6 @@ namespace AirBnb.Controllers
             Session.Abandon();
             Session["KhachThue"] = null;
 
-            ViewBag.ShowLogoutToast = true;
-
             return RedirectToAction("Index", "Home");
         }
         //-------------------------------------------

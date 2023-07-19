@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Favorites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using AirBnb.Models
+<div class="my-4">
+
+    <h2>Favorite List</h2>
+
+
+    @if (Model.Count == 0)
+    {
+        <div class="d-flex align-items-center justify-content-center my-4">
+
+            <p class="primaryColor fs-2 fw-bold">No posted in this list!</p>
+
+        </div>
+    }
+    else
+    {
+        @* Hien thi list *@
+
+        <div class="placeList my-4">
+
+            @foreach (var item in Model)
+            {
+
+                <div class="placeFrame ">
+                    <a class="text-danger" href="@Url.Action("RemoveFromFavorites", "User", new { MaPhong = item.MaPhong })">
+                        <i class="fa-solid fa-trash"></i>
+                        Remove
+                    </a>
+
+                    <div class="slider-frame mx-auto mx-md-0">
+                        <div class="">
+                            <div class="img-container">
+                                <img class="img" src="@item.HinhAnh1" alt="Alternate Text" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2 fw-medium fs-5 text-black" style="width: 100%;">
+
+                        <div class="text-truncate">@item.TieuDe</div>
+                    </div>
+
+
+                    <div class="d-flex TypeAndRating my-2 text-black-50">
+                        <p>@item.DanhMucPhong.TenDanhMuc</p>
+
+
+                    </div>
+
+                    <div class="d-flex text-black">
+                        <span class=" fw-bold">  $@item.Gia1Ngay.ToString("0") </span>
+                        <span> / night</span>
+                    </div>
+
+                </div>
+            }
+
+
+        </div>
+
+    }
+
+
+
+</div>

@@ -398,6 +398,8 @@
     <Content Include="Views\Host\CreateRoom.cshtml" />
     <Content Include="Views\Host\EditRoom.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
+    <Content Include="Views\User\Favorites.cshtml" />
+    <Content Include="Views\User\Reservations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -433,7 +435,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49789</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44334/</IISUrl>
+          <IISUrl>https://localhost:44335/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

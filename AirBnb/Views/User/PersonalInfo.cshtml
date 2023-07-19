@@ -1,4 +1,4 @@
-﻿
+﻿@using AirBnb.Models;
 @{
     ViewBag.Title = "Personal Info";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,7 +21,7 @@
 
                             <div class="input-group">
 
-                                <input type="text" class="form-control" id="nameInput" value="Jason Huynh" readonly />
+                                <input type="text" class="form-control" id="nameInput" value="@Model.Ten" readonly />
                             </div>
 
                         </div>
@@ -41,7 +41,7 @@
 
                                 <div class="input-group">
 
-                                    <input type="text" class="form-control" id="phoneInput" value="0931902211" readonly />
+                                    <input type="text" class="form-control" id="phoneInput" value="@Model.SDT" readonly />
                                 </div>
 
                             </div>
@@ -62,7 +62,7 @@
             @*Noti Panel*@
 
             <div class="col-lg-4  mx-auto bg-body ">
-                fafafw
+
             </div>
         </div>
     </section>
@@ -93,7 +93,7 @@
             infoValue.style.display = "none";
             infoInput.style.borderColor = '#ff6f63';
             infoInput.focus();
-            editBtn.textContent = 'Save';
+            editBtn[inputId].textContent = 'Save';
         } else {
             infoInput.readOnly = true;
             infoInput.style.display = "none";
