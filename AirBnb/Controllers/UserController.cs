@@ -74,7 +74,7 @@ namespace AirBnb.Controllers
             }
             var name = ((KhachThue)Session["KhachThue"]).Ten;
 
-         
+
             return RedirectToAction("Favorites", "User", new { name = name });
         }
 
@@ -152,10 +152,72 @@ namespace AirBnb.Controllers
 
 
         //------------------
-        public ActionResult Reservations()
+        //Đặt phòng
+        public ActionResult Reservations(string name)
         {
 
-            return View();
+            // Lấy danh sách các phòng thuộc mã chủ nhà
+            List<DonDatPhong> reservationList =
+                db.DonDatPhongs
+                .Where(d => d.KhachThue.Ten == name)
+                 .ToList();
+
+            ViewBag.SoNgayThue = ViewData["SoNgayThue"] as int?;
+            ViewBag.TongChiPhi = ViewData["TongChiPhi"] as decimal?;
+            ViewBag.NgayDat = ViewData["NgayDat"] as DateTime?;
+
+            return View(reservationList);
         }
+
+        [HttpPost]
+        public ActionResult AddToReservations(DateTime start, DateTime end, int MaPhong)
+        {
+            //Ktra đã đnhap chưa
+            if (Session["KhachThue"] == null)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+
+            // Tính số ngày thuê
+            int SoNgayThue = (int)(end - start).TotalDays;
+
+            // Lấy thông tin về phòng từ CSDL 
+            using (var dbContext = new AirbnbEntities())
+            {
+                var room = dbContext.Phongs.FirstOrDefault(r => r.MaPhong == MaPhong);
+
+                if (room != null)
+                {
+                    // Tính tổng chi phí ( 15 : service fee, 5 : Cleaning fee
+                    decimal TongChiPhi = room.Gia1Ngay * SoNgayThue + 15 + 5;
+
+                    // Lưu thông tin đặt phòng vào CSDL
+                    DonDatPhong booking = new DonDatPhong
+                    {
+                        NgayDat = DateTime.Now,
+                        TongChiPhi = TongChiPhi,
+                        SoNgayThue = SoNgayThue,
+                        MaPhong = MaPhong,
+                        MaKH = ((KhachThue)Session["KhachThue"]).MaKH
+
+                    };
+
+
+                    ViewData["TongChiPhi"] = ViewBag.TongChiPhi;
+                    ViewData["SoNgayThue"] = ViewBag.SoNgayThue;
+                    ViewData["NgayDat"] = ViewBag.NgayDat;
+
+
+                    dbContext.DonDatPhongs.Add(booking);
+                    dbContext.SaveChanges();
+                }
+            }
+
+            var name = ((KhachThue)Session["KhachThue"]).Ten;
+            // Redirect về trang hiển thị thông tin đặt phòng
+            return RedirectToAction("Reservations", "User", new { name = name });
+        }
+
+
     }
 }

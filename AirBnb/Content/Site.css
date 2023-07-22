@@ -339,12 +339,33 @@ carousel-inner {
 }
 
 
+.custom-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ff5f63;
+    padding: 20px;
+    border: 1px solid #ff5f63;
+    color: white;
+    border-radius: 12px;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+    .custom-alert.show {
+        opacity: 1;
+    }
+
 
 
 .content {
     position: relative;
     width: 50%;
-    //height: 160px;
+    /*height: 160px;*/
     overflow: hidden;
     font-size: 35px;
     line-height: 40px;

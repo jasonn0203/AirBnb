@@ -10,7 +10,6 @@
         stroke: red;
         fill: red;
     }
-
 </style>
 
 <main class="my-4">
@@ -45,7 +44,7 @@
                             @using (Html.BeginForm("AddToFavorites", "User", FormMethod.Post))
                             {
                                 <input id="favorite" type="hidden" name="MaPhong" value="@Model.MaPhong" />
-                                <button type="submit" class="favorite-button border-0 rounded-2"  >
+                                <button type="submit" class="favorite-button border-0 rounded-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff5f63" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                                     </svg>
@@ -171,90 +170,162 @@
                 </div>
 
 
-
-
-
-
-
             </div>
 
 
 
             @*Price detail*@
-            @*Remember to put it in Form*@
+
+
             <div class="col-lg-4 p-4 room-checkout position-relative mx-auto  ">
-                <div class="d-flex justify-content-between">
-                    <span class="fw-bolder fs-3 ">
-                        <span class="primaryColor">$@Model.Gia1Ngay.ToString("0")</span>
-                        <span class="fw-lighter fs-5 ">night</span>
-                    </span>
-                </div>
-
-                <div class="my-2">Guest:</div>
-                <div class="input-group my-2">
-                    <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                        <option selected>Select ..</option>
-                        @for (int i = 1; i <= Model.SLKhach; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
-                </div>
-
-
-                @*Date Picker*@
-
-
-                <div class="d-flex justify-content-between column-gap-2 my-3">
-                    <input placeholder="Start Date" type="date" id="start" name="start" value="@Model.NgayBatDau" min="@Model.NgayBatDau + 1" max="@Model.NgayKetThuc" />
-                    <input placeholder="End Date" type="date" id="end" name="end" value="@Model.NgayKetThuc" min="@Model.NgayKetThuc" max="@Model.NgayKetThuc" />
-                </div>
-
-
-                @*Price and Fees*@
-                <div class="my-4">
-                    <div class="d-flex justify-content-between mb-4  ">
-                        <p class="text-black-50 fw-bold">1 nights</p>
-                        <p class=" fw-bold primaryColor">150$</p>
+                <form method="post" action="@Url.Action("AddToReservations", "User")" onsubmit="return validateForm()">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bolder fs-3 ">
+                            <span class="primaryColor">$@Model.Gia1Ngay.ToString("0")</span>
+                            <span class="fw-lighter fs-5 ">night</span>
+                        </span>
                     </div>
 
-                    <div class="d-flex justify-content-between mb-4  text-black-50">
-                        <p class="text-black-50 fw-bold">Airbnb Service Fee</p>
-                        <p class=" fw-bold primaryColor">40$</p>
+                    <div class="my-2">Guest:</div>
+                    <div class="input-group my-2">
+                        <select class="form-select" name="guests" id="guestSelect" aria-label="Example select with button addon">
+                            <option selected>Select ..</option>
+                            @for (int i = 1; i <= Model.SLKhach; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
                     </div>
 
-                    <div class="d-flex justify-content-between pb-4 text-black-50 border-bottom">
-                        <p class="text-black-50 fw-bold">Cleaning Fee</p>
-                        <p class=" fw-bold primaryColor">14$</p>
+
+                    @*Date Picker*@
+
+
+                    <div class="d-flex justify-content-between column-gap-2 my-3">
+                        <input placeholder="Start Date" type="date" id="start" name="start" value="" min="@Model.NgayBatDau.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
+                        <input placeholder="End Date" type="date" id="end" name="end" value="" min="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
                     </div>
 
-                    @*TOTAL FEE*@
-                    <div class="d-flex justify-content-between pt-2 text-black-50 ">
-                        <p class="fw-bold fs-4 primaryColor">Total Fee</p>
-                        <p class=" fw-bold primaryColor fs-4">154$</p>
+
+
+
+
+                    @*Price and Fees*@
+                    <div class="my-4">
+                        <div class="d-flex justify-content-between mb-4  ">
+                            <p id="numNights" class="text-black-50 fw-bold"> </p>
+                            <p class=" fw-bold primaryColor">150$</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4  text-black-50">
+                            <p class="text-black-50 fw-bold">Airbnb Service Fee</p>
+                            <p class=" fw-bold primaryColor">15$</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between pb-4 text-black-50 border-bottom">
+                            <p class="text-black-50 fw-bold">Cleaning Fee</p>
+                            <p class=" fw-bold primaryColor">5$</p>
+                        </div>
+
+                        @*TOTAL FEE*@
+                        <div class="d-flex justify-content-between pt-2 text-black-50 ">
+                            <p class="fw-bold fs-4 primaryColor">Total Fee</p>
+                            <p class=" fw-bold primaryColor fs-4">154$</p>
+                        </div>
+
                     </div>
-
-                </div>
-
-                @*Button*@
-                <a class="btn-reserve position-absolute fixed-bottom " href="#">Reserve</a>
+                    <input type="hidden" name="MaPhong" value="@Model.MaPhong" />
 
 
+                    @*Button*@
+                    <button type="submit" class="btn-reserve position-absolute fixed-bottom  border-0 " href="#">Reserve</button>
+
+
+                </form>
             </div>
         </div>
     </section>
 
+
+
+
 </main>
 
-<script>
 
-        $(document).ready(function () {
-            $(".favorite-button").click(function () {
-                $(this).find(".favorite-heart").toggleClass("favorite-heart-active");
-            });
+<script>
+    // Lấy đối tượng ngày bắt đầu và ngày kết thúc từ DOM
+    const startDateInput = document.getElementById("start");
+    const endDateInput = document.getElementById("end");
+
+    // Thêm sự kiện onchange cho ngày bắt đầu
+    startDateInput.addEventListener("change", function () {
+        // Chuyển đổi giá trị ngày bắt đầu thành đối tượng Date
+        const startDate = new Date(startDateInput.value);
+
+        // Tính ngày kết thúc là ngày bắt đầu + 1
+        const nextDay = new Date(startDate);
+        nextDay.setDate(startDate.getDate() + 1);
+
+        // Đặt giá trị tối thiểu cho ngày kết thúc là ngày bắt đầu + 1
+        const minEndDate = nextDay.toISOString().split('T')[0];
+        endDateInput.min = minEndDate;
+
+        // Nếu ngày kết thúc hiện tại nhỏ hơn giá trị tối thiểu, đặt lại ngày kết thúc thành giá trị tối thiểu
+        if (new Date(endDateInput.value) < nextDay) {
+            endDateInput.value = minEndDate;
+        }
     });
 
 
+    document.getElementById("start").addEventListener("change", updateNumNights);
+    document.getElementById("end").addEventListener("change", updateNumNights);
+    //Render số ngày từ ô chọn ngày bd,kt
+    function updateNumNights() {
+
+        var startDate = document.getElementById("start").value;
+        var endDate = document.getElementById("end").value;
+
+        if (startDate === "" || endDate === "") {
+            // ĐK 1 trong 2 chưa được chọn giá tr
+            var numNightsElement = document.getElementById("numNights");
+            numNightsElement.innerText = "";
+            return;
+        }
+
+        // Nếu cả 2 có giá trị thì cập nhật lại
+        startDate = new Date(startDate);
+        endDate = new Date(endDate);
+
+        // Tính số ngày
+        var numNights = (endDate - startDate) / (1000 * 60 * 60 * 24);
+
+        // Display the number of nights in the paragraph element
+        var numNightsElement = document.getElementById("numNights");
+        numNightsElement.innerText = numNights + " nights";
+    }
+
+
+    // Check null ô ngày bắt đầu, kết thúc và ô select số lượng khách
+    function validateForm() {
+        var startDate = document.getElementById("start").value;
+        var endDate = document.getElementById("end").value;
+        var guestSelection = document.getElementById("guestSelect").value;
+
+        // Check đk ô bắt đầu và kết thúc
+        if (startDate === "" || endDate === "") {
+            showCustomAlert("Please select both start and end dates.");
+            return false; // Tránh submit form
+        }
+
+        // Check đk ô select số lượng khách
+        if (guestSelection === "Select ..") {
+            showCustomAlert("Please choose the quantity of guest.");
+            return false; // Tránh submit form
+        }
+
+        return true; // Cho submit nếu đk đúng
+    }
+
+
+
 </script>
-
-

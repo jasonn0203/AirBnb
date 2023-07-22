@@ -4,5 +4,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Reservations</h2>
+@using AirBnb.Models
+<div class="container-fluid">
+
+    @if (Model.Count == 0)
+    {
+        <div class="d-flex align-items-center justify-content-center my-4">
+
+            <p class="primaryColor fs-2 fw-bold">No reservation in this list!</p>
+
+        </div>
+    }
+    else
+    {
+
+
+        <h2 class="my-4">Reservations</h2>
+
+        <div class="my-4">
+
+            @foreach (var item in Model)
+            {
+                <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between">
+
+                    <a href=" #" class=" d-flex flex-column flex-lg-row column-gap-4 align-items-center justify-content-lg-center justify-content-around">
+
+                        <div class="img-container">
+                            <img src="@item.Phong.HinhAnh1" class="img">
+                        </div>
+
+                        <div>
+                            <div class="mt-2 fw-medium fs-3 text-black" style="width: 100%;">
+
+                                <div class="text-truncate">@item.Phong.TieuDe</div>
+                                <div class="text-truncate fs-6">Room hosted by @item.Phong.ChuNha.Ten</div>
+                            </div>
+
+
+                            <div class=" my-2 text-black-50">
+                                <span class=" fw-bold my-1"> @item.SoNgayThue Days</span>
+                                <p class="fs-3 primaryColor fw-bold">$@item.TongChiPhi.ToString("0")</p>
+
+                                <hr class="primaryColor opacity-50 border-1 my-1" />
+                                <span class="opacity-75">  Booked At <br /> @item.NgayDat</span>
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                    <a class="primaryColor fw-bold" href="#">
+                        <i class="fa-solid fa-xmark"></i>
+                        Cancel
+                    </a>
+
+                </div>
+            }
+
+
+
+
+
+        </div>
+
+
+    }
+</div>
+
 

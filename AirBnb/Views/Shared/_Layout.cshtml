@@ -58,6 +58,8 @@
         @RenderBody()
     </div>
 
+    <div id="customAlert" class="custom-alert" style="display: none;"></div>
+
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-white text-muted mt-5">
         <!-- Section: Social media -->
@@ -191,7 +193,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
+    <script>
+        //Toggle alert
+        function showCustomAlert(message) {
+            var customAlert = document.getElementById("customAlert");
+            customAlert.innerText = message;
+            customAlert.classList.add("show");
+            customAlert.style.display = "block";
 
+            // Add a click event listener to the alert to hide it when the user clicks "OK"
+            document.addEventListener("click", function (event) {
+                if (!customAlert.contains(event.target)) {
+                    customAlert.style.display = "none";
+                }
+            });
+        }
+    </script>
 
 </body>
 
