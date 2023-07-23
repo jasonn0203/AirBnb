@@ -11,54 +11,81 @@
 
             @*Input Field*@
 
-            <div class="col-lg-7 col px-2  ">
-                <h2>Personal Info</h2>
-                <div class="my-5 d-flex flex-column row-gap-4">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="d-flex flex-column row-gap-2">
-                            <p class="fs-5">Name</p>
-                            <p id="nameValue" class="text-black-50 d-block"></p>
-
-                            <div class="input-group">
-
-                                <input type="text" class="form-control" id="nameInput" value="@Model.Ten" readonly />
-                            </div>
-
-                        </div>
-                        <div class="input-group-append">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#f55f63" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z" /></svg>
-                            <button class="btn border-0" id="editBtn" onclick="toggleEditField('name')">Edit</button>
-
-                        </div>
-
-                    </div>
-
+            @*<div class="col-lg-7 col px-2  ">
+                    <h2>Personal Info</h2>
                     <div class="my-5 d-flex flex-column row-gap-4">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex flex-column row-gap-2">
-                                <p class="fs-5">Phone Number</p>
-                                <p id="phoneValue" class="text-black-50"></p>
+                                <p class="fs-5">Name</p>
+                                <p id="nameValue" class="text-black-50 d-block"></p>
 
                                 <div class="input-group">
 
-                                    <input type="text" class="form-control" id="phoneInput" value="@Model.SDT" readonly />
+                                    <input type="text" class="form-control" id="nameInput" value="@Model.Ten" readonly />
                                 </div>
 
                             </div>
                             <div class="input-group-append">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#f55f63" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z" /></svg>
-                                <button class="btn border-0" id="editBtn" onclick="toggleEditField('phone')">Edit</button>
+                                <button class="btn border-0" id="editBtn" onclick="toggleEditField('name')">Edit</button>
 
                             </div>
 
                         </div>
+
+                        <div class="my-5 d-flex flex-column row-gap-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-column row-gap-2">
+                                    <p class="fs-5">Phone Number</p>
+                                    <p id="phoneValue" class="text-black-50"></p>
+
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control" id="phoneInput" value="@Model.SDT" readonly />
+                                    </div>
+
+                                </div>
+                                <div class="input-group-append">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#f55f63" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z" /></svg>
+                                    <button class="btn border-0" id="editBtn" onclick="toggleEditField('phone')">Edit</button>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>*@
+            <div class="col-lg-7 col px-2  ">
+                <h2>Personal Info</h2>
+                @using (Html.BeginForm("SavePersonalInfo", "User", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group my-4">
+                        <label for="name">Name</label>
+                        <div class="d-flex align-items-center justify-content-between ">
+                            <input type="text" class="form-control" id="name" name="name" value="@Model.Ten" readonly />
+                            <button type="button" style="border-color:#ff5f63" class="btn btn-light mt-2" onclick="toggleEdit('name')">Edit</button>
+
+                        </div>
                     </div>
 
-                </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+
+                        <div class="d-flex align-items-center justify-content-between ">
+
+                            <input type="text" class="form-control" id="phone" name="phone" value="@Model.SDT" readonly />
+                            <button type="button" style="border-color:#ff5f63" class="btn btn-light mt-2" onclick="toggleEdit('phone')">Edit</button>
+
+                        </div>
+                    </div>
+
+                    <button type="submit" style="background-color: #ff5f63;" class="btn btn-outline-light my-4 w-25">Save Changes</button>
+                }
+
+
             </div>
-
-
-
             @*Noti Panel*@
 
             <div class="col-lg-4  mx-auto bg-body ">
@@ -74,34 +101,51 @@
 
 
 <script>
-    var infoValues = {
-        "name": { inputId: "nameInput", valueId: "nameValue" },
-        "phone": { inputId: "phoneInput", valueId: "phoneValue" }
-    };
-    var editBtn = document.getElementById('editBtn');
-    function toggleEditField(fieldName) {
-        var inputId = infoValues[fieldName].inputId;
-        var valueId = infoValues[fieldName].valueId;
-        var infoValue = document.getElementById(valueId);
-        var infoInput = document.getElementById(inputId);
+    //var infoValues = {
+    //    "name": { inputId: "nameInput", valueId: "nameValue" },
+    //    "phone": { inputId: "phoneInput", valueId: "phoneValue" }
+    //};
+    //var editBtn = document.getElementById('editBtn');
+    //function toggleEditField(fieldName) {
+    //    var inputId = infoValues[fieldName].inputId;
+    //    var valueId = infoValues[fieldName].valueId;
+    //    var infoValue = document.getElementById(valueId);
+    //    var infoInput = document.getElementById(inputId);
 
 
 
-        if (infoInput.readOnly) {
-            infoInput.style.display = "block";
-            infoInput.readOnly = false;
-            infoValue.style.display = "none";
-            infoInput.style.borderColor = '#ff6f63';
-            infoInput.focus();
-            editBtn[inputId].textContent = 'Save';
+    //    if (infoInput.readOnly) {
+    //        infoInput.style.display = "block";
+    //        infoInput.readOnly = false;
+    //        infoValue.style.display = "none";
+    //        infoInput.style.borderColor = '#ff6f63';
+    //        infoInput.focus();
+    //        editBtn[inputId].textContent = 'Save';
+    //    } else {
+    //        infoInput.readOnly = true;
+    //        infoInput.style.display = "none";
+    //        infoInput.style.borderColor = '#dadada';
+    //        infoInput.style.backgroundColor = 'transparent';
+    //        editBtn.textContent = 'Edit';
+    //        infoValue.style.display = "block";
+    //        infoValue.textContent = infoInput.value;
+    //    }
+    //}
+
+
+
+    function toggleEdit(fieldName) {
+        var inputField = document.getElementById(fieldName);
+        var editButton = inputField.nextElementSibling;
+
+        if (inputField.readOnly) {
+            inputField.readOnly = false;
+            editButton.textContent = "Cancel";
         } else {
-            infoInput.readOnly = true;
-            infoInput.style.display = "none";
-            infoInput.style.borderColor = '#dadada';
-            infoInput.style.backgroundColor = 'transparent';
-            editBtn.textContent = 'Edit';
-            infoValue.style.display = "block";
-            infoValue.textContent = infoInput.value;
+            inputField.readOnly = true;
+            editButton.textContent = "Edit";
         }
+
+        inputField.focus();
     }
 </script>

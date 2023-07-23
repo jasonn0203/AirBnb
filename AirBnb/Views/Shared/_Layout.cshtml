@@ -201,7 +201,7 @@
             customAlert.classList.add("show");
             customAlert.style.display = "block";
 
-            // Add a click event listener to the alert to hide it when the user clicks "OK"
+            // Ẩn alert
             document.addEventListener("click", function (event) {
                 if (!customAlert.contains(event.target)) {
                     customAlert.style.display = "none";

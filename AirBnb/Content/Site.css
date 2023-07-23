@@ -785,6 +785,14 @@ input:checked + label .action span.option-2 {
     border: 1px solid #ff5f63;
     overflow: hidden;
 }
+.room-checkout-booked {
+    width: 300px;
+    max-height: 300px;
+    border-radius: 22px;
+    background-color : #ff5f63;
+    color: white;
+    overflow: hidden;
+}
 
 .text-description {
     color: #222222;
@@ -2363,4 +2371,20 @@ input[type="date"] {
         right: 4%;
         opacity: 0.5;
     }
+}
+
+
+
+/*---------------------------------------------------------------------------*/
+/* Optional custom styles for disabled elements */
+.disabled-select,
+.disabled-date-picker {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.disabled-button {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+    pointer-events: none;
 }

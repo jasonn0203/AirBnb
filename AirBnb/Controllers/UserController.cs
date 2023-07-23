@@ -1,9 +1,9 @@
-﻿using System;
+﻿using AirBnb.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AirBnb.Models;
 
 namespace AirBnb.Controllers
 {
@@ -36,6 +36,31 @@ namespace AirBnb.Controllers
             var userInfo = db.KhachThues.FirstOrDefault(c => c.Ten == name);
             return View(userInfo);
         }
+
+        public ActionResult SavePersonalInfo()
+        {
+            var name = ((KhachThue)Session["KhachThue"]).Ten;
+            var userInfo = db.KhachThues.FirstOrDefault(c => c.Ten == name);
+            if (userInfo == null)
+            {
+                return View("NotFound", "Home");
+            }
+
+            // Get the new values of the name and phone fields from the user.
+            var newName = Request.Form["name"];
+            var phone = Request.Form["phone"];
+
+            // Update the database.
+            userInfo.Ten = newName;
+            userInfo.SDT = phone;
+            db.SaveChanges();
+
+            ((KhachThue)Session["KhachThue"]).Ten = newName;
+            // Redirect the user back to the PersonalInfo page with the updated name parameter.
+            return RedirectToAction("PersonalInfo", "User", new { name = newName });
+        }
+
+
 
         //--------------Danh sách yêu thích
         public ActionResult Favorites(string name)
@@ -162,9 +187,6 @@ namespace AirBnb.Controllers
                 .Where(d => d.KhachThue.Ten == name)
                  .ToList();
 
-            ViewBag.SoNgayThue = ViewData["SoNgayThue"] as int?;
-            ViewBag.TongChiPhi = ViewData["TongChiPhi"] as decimal?;
-            ViewBag.NgayDat = ViewData["NgayDat"] as DateTime?;
 
             return View(reservationList);
         }
@@ -188,8 +210,17 @@ namespace AirBnb.Controllers
 
                 if (room != null)
                 {
-                    // Tính tổng chi phí ( 15 : service fee, 5 : Cleaning fee
-                    decimal TongChiPhi = room.Gia1Ngay * SoNgayThue + 15 + 5;
+                    // Convert Gia1Ngay to decimal to ensure proper calculation
+                    decimal pricePerNight = room.Gia1Ngay;
+
+                    // Define service fee and cleaning fee as decimal
+                    decimal serviceFee = Convert.ToDecimal(15);
+                    decimal cleaningFee = Convert.ToDecimal(5);
+
+                    // Tính tổng chi phí (Gia1Ngay * SoNgayThue) + serviceFee + cleaningFee
+                    decimal TongChiPhi = (pricePerNight * SoNgayThue) + serviceFee + cleaningFee;
+
+
 
                     // Lưu thông tin đặt phòng vào CSDL
                     DonDatPhong booking = new DonDatPhong
@@ -203,12 +234,10 @@ namespace AirBnb.Controllers
                     };
 
 
-                    ViewData["TongChiPhi"] = ViewBag.TongChiPhi;
-                    ViewData["SoNgayThue"] = ViewBag.SoNgayThue;
-                    ViewData["NgayDat"] = ViewBag.NgayDat;
-
-
                     dbContext.DonDatPhongs.Add(booking);
+                    dbContext.SaveChanges();
+
+                    room.TinhTrang = true;
                     dbContext.SaveChanges();
                 }
             }
@@ -217,6 +246,51 @@ namespace AirBnb.Controllers
             // Redirect về trang hiển thị thông tin đặt phòng
             return RedirectToAction("Reservations", "User", new { name = name });
         }
+
+        //Hủy đặt phòng
+        [HttpPost]
+        public ActionResult CancelReservations(int MaPhong)
+        {
+
+            // Get the current logged-in customer's ID
+            int MaKH = ((KhachThue)Session["KhachThue"]).MaKH;
+
+            // Call the CancelReservations method to cancel the reservation
+            CancelReservationsAction(MaPhong, MaKH);
+
+            //Set lại tình trạng của phòng
+            using (var dbContext = new AirbnbEntities())
+            {
+                var room = dbContext.Phongs.FirstOrDefault(r => r.MaPhong == MaPhong);
+                if (room != null)
+                {
+                    room.TinhTrang = false;
+                    dbContext.SaveChanges();
+                }
+            }
+
+
+
+            var name = ((KhachThue)Session["KhachThue"]).Ten;
+            // Redirect về trang hiển thị thông tin đặt phòng
+            return RedirectToAction("Reservations", "User", new { name = name });
+        }
+
+        //Hủy đặt phòng
+        private void CancelReservationsAction(int MaPhong, int MaKH)
+        {
+            // Xóa khỏi bảng Đơn đặt phòng
+            using (var context = new AirbnbEntities())
+            {
+                var reservationCancel = context.DonDatPhongs.FirstOrDefault(y => y.MaPhong == MaPhong && y.MaKH == MaKH);
+                if (reservationCancel != null)
+                {
+                    context.DonDatPhongs.Remove(reservationCancel);
+                    context.SaveChanges();
+                }
+            }
+        }
+
 
 
     }

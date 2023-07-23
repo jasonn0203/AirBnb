@@ -176,73 +176,92 @@
 
             @*Price detail*@
 
+            @if (Model.TinhTrang)
+            {
 
-            <div class="col-lg-4 p-4 room-checkout position-relative mx-auto  ">
-                <form method="post" action="@Url.Action("AddToReservations", "User")" onsubmit="return validateForm()">
-                    <div class="d-flex justify-content-between">
-                        <span class="fw-bolder fs-3 ">
-                            <span class="primaryColor">$@Model.Gia1Ngay.ToString("0")</span>
-                            <span class="fw-lighter fs-5 ">night</span>
-                        </span>
-                    </div>
+                <div class="col-lg-4 p-4 room-checkout-booked d-flex flex-column align-items-center justify-content-center position-relative mx-auto ">
+                    <p class="text-center fw-bold fs-4 text-white">Room Booked !</p>
+                    <span class="fw-bolder fs-3 my-4 ">
+                        <span class="fw-bolder text-white">$@Model.Gia1Ngay.ToString("0")</span>
+                        <span class="fw-lighter fs-5  ">night</span>
+                    </span>
 
-                    <div class="my-2">Guest:</div>
-                    <div class="input-group my-2">
-                        <select class="form-select" name="guests" id="guestSelect" aria-label="Example select with button addon">
-                            <option selected>Select ..</option>
-                            @for (int i = 1; i <= Model.SLKhach; i++)
-                            {
-                                <option value="@i">@i</option>
-                            }
-                        </select>
-                    </div>
-
-
-                    @*Date Picker*@
-
-
-                    <div class="d-flex justify-content-between column-gap-2 my-3">
-                        <input placeholder="Start Date" type="date" id="start" name="start" value="" min="@Model.NgayBatDau.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
-                        <input placeholder="End Date" type="date" id="end" name="end" value="" min="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
-                    </div>
-
-
-
-
-
-                    @*Price and Fees*@
-                    <div class="my-4">
-                        <div class="d-flex justify-content-between mb-4  ">
-                            <p id="numNights" class="text-black-50 fw-bold"> </p>
-                            <p class=" fw-bold primaryColor">150$</p>
+                    <a class="text-white border-white btn btn-outline-dark" href="@Url.Action("Index","Home")">Choose another rooms</a>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-4 p-4 room-checkout position-relative mx-auto  ">
+                    <form method="post" action="@Url.Action("AddToReservations", "User")" onsubmit="return validateForm()">
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bolder fs-3 ">
+                                <span class="primaryColor">$@Model.Gia1Ngay.ToString("0")</span>
+                                <span class="fw-lighter fs-5 ">night</span>
+                            </span>
                         </div>
 
-                        <div class="d-flex justify-content-between mb-4  text-black-50">
-                            <p class="text-black-50 fw-bold">Airbnb Service Fee</p>
-                            <p class=" fw-bold primaryColor">15$</p>
+                        <div class="my-2">Guest:</div>
+                        <div class="input-group my-2">
+                            <select class="form-select" name="guests" id="guestSelect" aria-label="Example select with button addon">
+                                <option selected>Select ..</option>
+                                @for (int i = 1; i <= Model.SLKhach; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
                         </div>
 
-                        <div class="d-flex justify-content-between pb-4 text-black-50 border-bottom">
-                            <p class="text-black-50 fw-bold">Cleaning Fee</p>
-                            <p class=" fw-bold primaryColor">5$</p>
+
+                        @*Date Picker*@
+
+
+                        <div class="d-flex justify-content-between column-gap-2 my-3">
+                            <input placeholder="Start Date" type="date" id="start" name="start" value="" min="@Model.NgayBatDau.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
+                            <input placeholder="End Date" type="date" id="end" name="end" value="" min="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
                         </div>
 
-                        @*TOTAL FEE*@
-                        <div class="d-flex justify-content-between pt-2 text-black-50 ">
-                            <p class="fw-bold fs-4 primaryColor">Total Fee</p>
-                            <p class=" fw-bold primaryColor fs-4">154$</p>
+
+
+
+
+                        @*Price and Fees*@
+                        <div class="my-4">
+                            <div class="d-flex justify-content-between mb-4  ">
+                                <p id="numNights" class="text-black-50 fw-bold"> </p>
+                                <p class=" fw-bold primaryColor" id="priceByNights">$0</p>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-4  text-black-50">
+                                <p class="text-black-50 fw-bold">Airbnb Service Fee</p>
+                                <p class=" fw-bold primaryColor">15$</p>
+                            </div>
+
+                            <div class="d-flex justify-content-between pb-4 text-black-50 border-bottom">
+                                <p class="text-black-50 fw-bold">Cleaning Fee</p>
+                                <p class=" fw-bold primaryColor">5$</p>
+                            </div>
+
+                            @*TOTAL FEE*@
+                            <div class="d-flex justify-content-between pt-2 text-black-50 ">
+                                <p class="fw-bold fs-4 primaryColor">Total Fee</p>
+                                <p class=" fw-bold primaryColor fs-4" id="totalFee">$0</p>
+                            </div>
+
                         </div>
-
-                    </div>
-                    <input type="hidden" name="MaPhong" value="@Model.MaPhong" />
-
-
-                    @*Button*@
-                    <button type="submit" class="btn-reserve position-absolute fixed-bottom  border-0 " href="#">Reserve</button>
+                        <input type="hidden" name="MaPhong" value="@Model.MaPhong" />
+                        <input type="hidden" id="pricePerNight" value="@Model.Gia1Ngay" />
 
 
-                </form>
-            </div>
+                        @*Button*@
+                        <button type="submit" class="btn-reserve position-absolute fixed-bottom  border-0 " href="#">Reserve</button>
+
+
+                    </form>
+                </div>
+
+            }
+
+
         </div>
     </section>
 
@@ -275,6 +294,7 @@
             endDateInput.value = minEndDate;
         }
     });
+    //---------------------------------------------------------------------------
 
 
     document.getElementById("start").addEventListener("change", updateNumNights);
@@ -299,11 +319,14 @@
         // Tính số ngày
         var numNights = (endDate - startDate) / (1000 * 60 * 60 * 24);
 
-        // Display the number of nights in the paragraph element
+        // Hiển thị số ngày
         var numNightsElement = document.getElementById("numNights");
         numNightsElement.innerText = numNights + " nights";
+        calculateTotalFee();
+
     }
 
+    //---------------------------------------------------------------------------
 
     // Check null ô ngày bắt đầu, kết thúc và ô select số lượng khách
     function validateForm() {
@@ -322,10 +345,45 @@
             showCustomAlert("Please choose the quantity of guest.");
             return false; // Tránh submit form
         }
+        calculateTotalFee();
+
 
         return true; // Cho submit nếu đk đúng
     }
 
+    //---------------------------------------------------------------------------
+
+
+    //Hiển thị tổng chi phí
+    function calculateTotalFee() {
+
+
+        //Lấy ngày
+        var startDate = new Date(document.getElementById("start").value);
+        var endDate = new Date(document.getElementById("end").value);
+
+        var timeOneDay = 24 * 60 * 60 * 1000; // Hiển thị tổng thời gian 1 ngày theo miliseconds
+        var numNightsValue = Math.round((endDate - startDate) / timeOneDay);
+
+        // Nhận giá trị giá của 1 ngày
+        var pricePerNight = parseFloat(document.getElementById("pricePerNight").value);
+        //Cập nhật giá trị giá theo số ngày
+        document.getElementById("priceByNights").innerText = "$" + pricePerNight * numNightsValue;
+
+
+        //Phí dịch vụ mặc định
+        var serviceFee = 15;
+        var cleaningFee = 5;
+
+        //Tính tổng giá
+        var totalFee = pricePerNight * numNightsValue + serviceFee + cleaningFee;
+        //Hiển thị kết quả
+        document.getElementById("totalFee").innerText = "$" + totalFee;
+    }
+
+
+    //---------------------------------------------------------------------------
+    //Disable bảng giá khi phòng trong trạng thái Booked
 
 
 </script>
