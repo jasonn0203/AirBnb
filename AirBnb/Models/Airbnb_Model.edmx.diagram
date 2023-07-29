@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="AirbnbModel.DanhMucPhong" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AirbnbModel.DonDatPhong" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AirbnbModel.HoaDon" Width="1.5" PointX="10.5" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AirbnbModel.KhachThue" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirbnbModel.KhachThue" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="AirbnbModel.KhuyenMai" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AirbnbModel.Phong" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AirbnbModel.YeuThich" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />

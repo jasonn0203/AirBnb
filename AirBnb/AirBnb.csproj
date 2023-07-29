@@ -400,6 +400,8 @@
     <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\User\Favorites.cshtml" />
     <Content Include="Views\User\Reservations.cshtml" />
+    <Content Include="Views\Book\SuccessfullyPayment.cshtml" />
+    <Content Include="Views\User\Bills.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

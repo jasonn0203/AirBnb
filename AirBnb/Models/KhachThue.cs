@@ -11,7 +11,8 @@ namespace AirBnb.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class KhachThue
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,17 +23,23 @@ namespace AirBnb.Models
             this.HoaDons = new HashSet<HoaDon>();
             this.YeuThiches = new HashSet<YeuThich>();
         }
-    
+
         public int MaKH { get; set; }
         public string Ten { get; set; }
         public string DiaChi { get; set; }
         public string Email { get; set; }
         public string MatKhau { get; set; }
         public string SDT { get; set; }
+
+
         public string SoTK { get; set; }
+
+
         public Nullable<System.DateTime> NgayHH { get; set; }
+
+
         public Nullable<short> CVV { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhGia> DanhGias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

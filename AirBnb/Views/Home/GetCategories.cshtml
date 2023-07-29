@@ -10,7 +10,7 @@
                     <div class="row row-gap-lg-4">
                         @foreach (var danhMucPhong in Model)
                         {
-                            <a style="color: black;" href="@Url.Action("RoomByCategory", "Home", new { categoryName = danhMucPhong.TenDanhMuc })" class="d-flex flex-column col-lg-2 col-md-4 placeView align-items-center justify-content-center">
+                            <a data-toggle="tooltip" data-placement="top" title="@danhMucPhong.TenDanhMuc" style="color: black;" href="@Url.Action("RoomByCategory", "Home", new { categoryName = danhMucPhong.TenDanhMuc })" class="d-flex flex-column col-lg-2 col-md-4 placeView align-items-center justify-content-center">
                                 <i class="fa fa-@danhMucPhong.Icon"></i>
                                 <span>@danhMucPhong.TenDanhMuc</span>
                             </a>

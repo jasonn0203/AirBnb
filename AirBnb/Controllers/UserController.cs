@@ -1,6 +1,8 @@
 ﻿using AirBnb.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
@@ -33,6 +35,12 @@ namespace AirBnb.Controllers
 
         public ActionResult PersonalInfo(string name)
         {
+            //Ktra đã đnhap chưa
+            if (Session["KhachThue"] == null)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+
             var userInfo = db.KhachThues.FirstOrDefault(c => c.Ten == name);
             return View(userInfo);
         }
@@ -49,10 +57,32 @@ namespace AirBnb.Controllers
             // Get the new values of the name and phone fields from the user.
             var newName = Request.Form["name"];
             var phone = Request.Form["phone"];
+            var soTk = Request.Form["card-number"];
+            var ngayHH = Request.Form["expiry-date"];
+            var cvv = Request.Form["cvv-number"];
+
+            // Convert ngayHH to DateTime? and cvv to short?
+            DateTime? ngayHHDateTime = null;
+            short? cvvShort = null;
+
+            if (!string.IsNullOrEmpty(ngayHH))
+            {
+                ngayHHDateTime = DateTime.Parse(ngayHH);
+            }
+
+            if (!string.IsNullOrEmpty(cvv))
+            {
+                cvvShort = short.Parse(cvv);
+            }
+
 
             // Update the database.
             userInfo.Ten = newName;
             userInfo.SDT = phone;
+            userInfo.SoTK = soTk;
+            userInfo.NgayHH = ngayHHDateTime;
+            userInfo.CVV = cvvShort;
+            db.Entry(userInfo).State = EntityState.Modified;
             db.SaveChanges();
 
             ((KhachThue)Session["KhachThue"]).Ten = newName;
@@ -239,6 +269,16 @@ namespace AirBnb.Controllers
 
                     room.TinhTrang = true;
                     dbContext.SaveChanges();
+
+                    //Chuyển hướng trang thanh toán
+                    //Lấy id phòng đặt
+                    int reservationId = booking.MaDon;
+
+                    Session["ReservationId"] = reservationId; // Lưu vào Session
+                    Session["TongChiPhi"] = TongChiPhi; // Lưu vào Session
+
+                    //TempData["ReservationId"] = reservationId;
+                    return RedirectToAction("Stay", "Book", new { reservationId = reservationId });
                 }
             }
 
@@ -285,11 +325,37 @@ namespace AirBnb.Controllers
                 var reservationCancel = context.DonDatPhongs.FirstOrDefault(y => y.MaPhong == MaPhong && y.MaKH == MaKH);
                 if (reservationCancel != null)
                 {
+                    // Xóa ràng buộc
+                    var associatedHoaDon = context.HoaDons.Where(h => h.MaDon == reservationCancel.MaDon).ToList();
+                    foreach (var hoaDon in associatedHoaDon)
+                    {
+                        context.HoaDons.Remove(hoaDon);
+                    }
+
+
+
+
                     context.DonDatPhongs.Remove(reservationCancel);
                     context.SaveChanges();
                 }
             }
         }
+
+        //---------
+        //Hiển thị Bill
+        public ActionResult Bills(string name)
+        {
+
+            // Lấy danh sách các phòng thuộc mã chủ nhà
+            List<HoaDon> billLists =
+                db.HoaDons
+                .Where(d => d.KhachThue.Ten == name)
+                 .ToList();
+
+
+            return View(billLists);
+        }
+
 
 
 

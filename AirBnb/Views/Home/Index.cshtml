@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AirBnb.Models.Phong>
+
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -66,18 +67,18 @@
                         @* Hiển thị trạng thái phòng *@
                         @if (item.TinhTrang)
                         {
-                            <span class="text-danger ">Booked</span>
+                            <span style="font-size: 12px;" class="text-white bg-danger p-1  fw-medium rounded-2">Booked</span>
                         }
                         else
                         {
-                            <span class="text-success">Available</span>
+                            <span style="font-size: 12px;" class="text-white bg-success p-1  fw-medium rounded-2">Available</span>
                         }
 
 
                     </p>
                 </div>
 
-                <div class="d-flex text-black">
+                <div  class="d-flex text-black">
                     <span class=" fw-bold primaryColor">  $@item.Gia1Ngay.ToString("0")</span>
                     <span> / night</span>
                 </div>

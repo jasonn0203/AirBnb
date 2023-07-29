@@ -785,11 +785,12 @@ input:checked + label .action span.option-2 {
     border: 1px solid #ff5f63;
     overflow: hidden;
 }
+
 .room-checkout-booked {
     width: 300px;
     max-height: 300px;
     border-radius: 22px;
-    background-color : #ff5f63;
+    background-color: #ff5f63;
     color: white;
     overflow: hidden;
 }
@@ -1178,10 +1179,9 @@ input[type="date"] {
     }
 
 .cvv-class {
-    width: 120px;
+    width: 100%;
     border: 2px solid #ced4da;
     font-weight: 600;
-    font-size: 12px;
     height: 48px;
 }
 

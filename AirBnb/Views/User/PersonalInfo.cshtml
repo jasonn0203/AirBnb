@@ -9,53 +9,6 @@
     <section class="my-5">
         <div class="row  flex-column flex-lg-row gap-md-4 align-items-center justify-content-center align-items-md-start justify-content-md-start ">
 
-            @*Input Field*@
-
-            @*<div class="col-lg-7 col px-2  ">
-                    <h2>Personal Info</h2>
-                    <div class="my-5 d-flex flex-column row-gap-4">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex flex-column row-gap-2">
-                                <p class="fs-5">Name</p>
-                                <p id="nameValue" class="text-black-50 d-block"></p>
-
-                                <div class="input-group">
-
-                                    <input type="text" class="form-control" id="nameInput" value="@Model.Ten" readonly />
-                                </div>
-
-                            </div>
-                            <div class="input-group-append">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#f55f63" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z" /></svg>
-                                <button class="btn border-0" id="editBtn" onclick="toggleEditField('name')">Edit</button>
-
-                            </div>
-
-                        </div>
-
-                        <div class="my-5 d-flex flex-column row-gap-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-column row-gap-2">
-                                    <p class="fs-5">Phone Number</p>
-                                    <p id="phoneValue" class="text-black-50"></p>
-
-                                    <div class="input-group">
-
-                                        <input type="text" class="form-control" id="phoneInput" value="@Model.SDT" readonly />
-                                    </div>
-
-                                </div>
-                                <div class="input-group-append">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#f55f63" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6l4.25 4.25Z" /></svg>
-                                    <button class="btn border-0" id="editBtn" onclick="toggleEditField('phone')">Edit</button>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>*@
             <div class="col-lg-7 col px-2  ">
                 <h2>Personal Info</h2>
                 @using (Html.BeginForm("SavePersonalInfo", "User", FormMethod.Post))
@@ -70,13 +23,48 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group my-4">
                         <label for="phone">Phone Number</label>
 
                         <div class="d-flex align-items-center justify-content-between ">
 
                             <input type="text" class="form-control" id="phone" name="phone" value="@Model.SDT" readonly />
                             <button type="button" style="border-color:#ff5f63" class="btn btn-light mt-2" onclick="toggleEdit('phone')">Edit</button>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group my-4">
+                        <label for="card-number">Card Number</label>
+
+                        <div class="d-flex align-items-center justify-content-between ">
+
+                            <input type="text" class="form-control" id="card-number" name="card-number" value="@Model.SoTK" readonly />
+                            <button type="button" style="border-color:#ff5f63" class="btn btn-light mt-2" onclick="toggleEdit('card-number')">Edit</button>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group my-4">
+                        <label for="expiry-date">Expiry Date</label>
+
+                        <div class="d-flex align-items-center justify-content-between ">
+                            <input type="date" id="expiry-date" name="expiry-date" value="@Model.NgayHH" readonly />
+                            <button type="button" style="border-color:#ff5f63" class="btn btn-light mt-2" onclick="toggleEdit('expiry-date')">Edit</button>
+
+                        </div>
+                        <p>@Model.NgayHH.ToString("dd/MM/yyyy")</p>
+
+                    </div>
+
+
+                    <div class="form-group my-4">
+                        <label for="cvv-number">CVV Number</label>
+
+                        <div class="d-flex align-items-center justify-content-between ">
+
+                            <input type="tel" class="form-control" id="cvv-number" name="cvv-number" value="@Model.CVV" min="100" max="999" maxlength="3" pattern="\d*" readonly />
+                            <button type="button" style="border-color:#ff5f63" class="btn btn-light mt-2" onclick="toggleEdit('cvv-number')">Edit</button>
 
                         </div>
                     </div>
@@ -88,8 +76,19 @@
             </div>
             @*Noti Panel*@
 
-            <div class="col-lg-4  mx-auto bg-body ">
+            @{
+                string[] bannerArr = new string[]
+                {
+        "https://thelesliestyle.com/wp-content/uploads/2019/07/how-to-convert-a-bedroom-into-an-airbnb-6-upholstered-headboard-on-sloped-ceiling-681x1024.jpg",
+        "https://i.pinimg.com/736x/f0/87/d8/f087d8b737666e44104beb0471854b54.jpg",
+        "https://th.bing.com/th/id/R.079fb3c4893d43d28160981269cb8977?rik=uuytFDERSSqJrw&riu=http%3a%2f%2fannesage.com%2fwp-content%2fuploads%2f2016%2f04%2fschoolhouse-electric-4.jpg&ehk=Ym8HFcJv1jcYa7rgMk8ohIDfJezbP%2b%2flLVglsPJtKdM%3d&risl=&pid=ImgRaw&r=0"
+};
 
+                Random random = new Random();
+                string randomBannerUrl = bannerArr[random.Next(bannerArr.Length)];
+            }
+            <div class="col-lg-4  mx-auto bg-body ">
+                <img class="object-fit-cover w-100 h-auto" src="@randomBannerUrl" alt="Alternate Text" />
             </div>
         </div>
     </section>
@@ -101,36 +100,21 @@
 
 
 <script>
-    //var infoValues = {
-    //    "name": { inputId: "nameInput", valueId: "nameValue" },
-    //    "phone": { inputId: "phoneInput", valueId: "phoneValue" }
-    //};
-    //var editBtn = document.getElementById('editBtn');
-    //function toggleEditField(fieldName) {
-    //    var inputId = infoValues[fieldName].inputId;
-    //    var valueId = infoValues[fieldName].valueId;
-    //    var infoValue = document.getElementById(valueId);
-    //    var infoInput = document.getElementById(inputId);
+
+
+    function restrictToNumbers(inputId) {
+        document.getElementById(inputId).addEventListener("input", function (event) {
+            // Loại bỏ tất cả các ký tự không phải số từ giá trị nhập vào
+            this.value = this.value.replace(/\D/g, '');
+        });
+    }
+
+    // Gọi hàm và truyền id của trường nhập
+    restrictToNumbers("card-number");
+    restrictToNumbers("cvv-number");
 
 
 
-    //    if (infoInput.readOnly) {
-    //        infoInput.style.display = "block";
-    //        infoInput.readOnly = false;
-    //        infoValue.style.display = "none";
-    //        infoInput.style.borderColor = '#ff6f63';
-    //        infoInput.focus();
-    //        editBtn[inputId].textContent = 'Save';
-    //    } else {
-    //        infoInput.readOnly = true;
-    //        infoInput.style.display = "none";
-    //        infoInput.style.borderColor = '#dadada';
-    //        infoInput.style.backgroundColor = 'transparent';
-    //        editBtn.textContent = 'Edit';
-    //        infoValue.style.display = "block";
-    //        infoValue.textContent = infoInput.value;
-    //    }
-    //}
 
 
 
