@@ -1,9 +1,11 @@
-﻿using System;
+﻿using AirBnb.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AirBnb.Models;
+using System.Data.Entity;
+
 
 namespace AirBnb.Controllers
 {
@@ -11,11 +13,19 @@ namespace AirBnb.Controllers
     {
         AirbnbEntities db = new AirbnbEntities();
 
-        // Hiển thị chi tiết phòng
+        //Hiển thị chi tiết phòng
         public ActionResult Detail(string name)
         {
             var roomDetail = db.Phongs.FirstOrDefault(room => room.TieuDe == name);
-            
+
+            List<DanhGia> commentList = new List<DanhGia>();
+            if (roomDetail != null)
+            {
+                commentList = db.DanhGias.Where(dg => dg.MaPhong == roomDetail.MaPhong).ToList();
+            }
+
+            //ViewBag.RoomDetail = roomDetail;
+            ViewBag.CommentList = commentList;
 
             return View(roomDetail);
         }
@@ -23,32 +33,44 @@ namespace AirBnb.Controllers
 
 
 
-        //Comment
+
+        //POST
         [HttpPost]
-        public ActionResult AddComment(int MaPhong, int MaKH, string NoiDung)
+        public ActionResult AddComment(string comment, int MaPhong, int MaKH,string TieuDe)
         {
-            if (ModelState.IsValid)
+
+            if (Session["KhachThue"] == null)
             {
-                var danhGia = new DanhGia
-                {
-                    NoiDung = NoiDung,
-                    MaPhong = MaPhong,
-                    MaKH = MaKH
-                };
-
-                db.DanhGias.Add(danhGia);
-                db.SaveChanges();
-
-                // Truy vấn danh sách bình luận từ cơ sở dữ liệu
-                var comments = db.DanhGias.ToList();
-
-                // Truyền danh sách bình luận vào view để hiển thị
-                return View("Detail", comments);
+                return RedirectToAction("SignIn", "Home");
+            }
+            // Kiểm tra comment không rỗng
+            if (string.IsNullOrWhiteSpace(comment))
+            {
+                // Xử lý lỗi nếu cần thiết
+                return RedirectToAction("Detail", new { name = TieuDe });
             }
 
-            // Trường hợp ModelState không hợp lệ, xử lý lỗi hoặc thông báo cho người dùng
-            return View();
+            // Tạo đối tượng mới để lưu bình luận vào database
+            DanhGia newComment = new DanhGia
+            {
+                NoiDung = comment,
+                MaPhong = MaPhong,
+                MaKH = MaKH,
+                NgayBL = DateTime.Now,
+            };
+
+            // Lưu đối tượng mới vào database
+            using (var db = new AirbnbEntities())
+            {
+                db.DanhGias.Add(newComment);
+                db.SaveChanges();
+            }
+
+            // Quay trở lại trang chi tiết phòng sau khi thêm bình luận
+            return RedirectToAction("Detail", new { name = TieuDe });
         }
+
+
 
 
 

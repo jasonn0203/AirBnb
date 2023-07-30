@@ -123,6 +123,7 @@
 
                     </p>
                 </div>
+                @{ var tk = Session["KhachThue"] as AirBnb.Models.KhachThue;}
 
                 @*Comment*@
                 <div class="container my-4">
@@ -134,30 +135,51 @@
                                 </div>
 
                                 <div class="rounded-2 mt-3 d-flex flex-row gap-2 align-items-center p-3 form-color">
-                                    <img src="https://i.imgur.com/zQZSWrt.jpg" width="50" class="rounded-circle mr-2">
-                                    <textarea class="comment-section" placeholder="Enter your comment..."></textarea>
-                                    <button style="width:50px; padding: 0;" class="btn login-btn" type="submit">
-                                        <i class="fa-solid fa-paper-plane"></i>
-                                    </button>
+                                    <img src="~/Assets/Images/no-avatar.png" width="50" class="rounded-circle mr-2">
+                                    @if (tk != null)
+                                    {
+                                        <form class=" d-flex flex-row gap-2 align-items-center p-3" action="@Url.Action("AddComment", "Room")" method="post">
+                                            <!-- Your hidden input fields and textarea here -->
+                                            <input type="hidden" name="MaPhong" value="@Model.MaPhong" />
+                                            <input type="hidden" name="MaKH" value="@tk.MaKH" />
+                                            <input type="hidden" name="TieuDe" value="@Model.TieuDe" />
+                                            <textarea class="comment-section" name="comment" placeholder="Enter your comment..."></textarea>
+                                            <button style="width: 50px; padding: 0;" class="btn login-btn" type="submit">
+                                                <i class="fa-solid fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <p class="primaryColor fw-bold ">Please log in to leave a comment.</p>
+                                        <!-- You may also provide a login link here -->
+                                    }
                                 </div>
 
 
 
                                 <div class="mt-2">
-                                    <div class="d-flex flex-row p-3 gap-4">
-                                        <img src="https://i.imgur.com/zQZSWrt.jpg" width="32" height="32" class="rounded-circle mr-3">
-                                        <div class="w-100">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="d-flex flex-row align-items-center gap-2">
-                                                    <span class="mr-2 fw-medium fs-6">Donald Trump</span>
-                                                    <small class="c-badge">Top Comment</small>
+                                    @foreach (var binhLuan in ViewBag.CommentList)
+                                    {
+                                        <div class="d-flex flex-row p-3 gap-4">
+                                            <img src="~/Assets/Images/quan.png" width="32" height="32" class="rounded-circle mr-3">
+                                            <div class="w-100">
+                                                <div class="d-flex flex-column">
+                                                    <div class="d-flex flex-row align-items-center gap-2 ">
+                                                        <span class="mr-2 fw-medium fs-6">@binhLuan.KhachThue.Ten</span>
+
+
+                                                        <small class="c-badge">Top Comment</small>
+
+                                                    </div>
+
+                                                    <small style="font-size: 12px" class="fw-lighter opacity-50">@binhLuan.NgayBL</small>
                                                 </div>
+                                                <!-- (2) Hiển thị nội dung bình luận -->
+                                                <p class="text-justify comment-text my-2">@binhLuan.NoiDung</p>
                                             </div>
-                                            <p class="text-justify comment-text mb-0">Good Service, Best view, good expermient ! , Good Service, Best view, good expermient !, Good Service, Best view, good expermient !</p>
                                         </div>
-                                    </div>
-
-
+                                    }
                                 </div>
 
                             </div>

@@ -53,7 +53,19 @@
                             <button type="button" style="border-color:#ff5f63" class="btn btn-light mt-2" onclick="toggleEdit('expiry-date')">Edit</button>
 
                         </div>
-                        <p>@Model.NgayHH.ToString("dd/MM/yyyy")</p>
+                        @{
+                            if (Model.NgayHH != null)
+                            {
+                                <p>@Model.NgayHH.ToString("dd/MM/yyyy")</p>
+                            }
+                            else
+                            {
+                                <p></p>
+                            }
+                        }
+
+
+
 
                     </div>
 

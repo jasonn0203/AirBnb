@@ -26,6 +26,7 @@
           <Property Name="NoiDung" Type="nvarchar(max)" Nullable="false" />
           <Property Name="MaPhong" Type="int" Nullable="false" />
           <Property Name="MaKH" Type="int" Nullable="false" />
+          <Property Name="NgayBL" Type="datetime" />
         </EntityType>
         <EntityType Name="DanhMucPhong">
           <Key>
@@ -327,6 +328,7 @@
           <Property Name="MaKH" Type="Int32" Nullable="false" />
           <NavigationProperty Name="KhachThue" Relationship="Self.FK__DanhGia__MaKH__3A81B327" FromRole="DanhGia" ToRole="KhachThue" />
           <NavigationProperty Name="Phong" Relationship="Self.FK__DanhGia__MaPhong__398D8EEE" FromRole="DanhGia" ToRole="Phong" />
+          <Property Name="NgayBL" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="DanhMucPhong">
           <Key>
@@ -642,6 +644,7 @@
           <EntitySetMapping Name="DanhGias">
             <EntityTypeMapping TypeName="AirbnbModel.DanhGia">
               <MappingFragment StoreEntitySet="DanhGia">
+                <ScalarProperty Name="NgayBL" ColumnName="NgayBL" />
                 <ScalarProperty Name="MaDanhGia" ColumnName="MaDanhGia" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />

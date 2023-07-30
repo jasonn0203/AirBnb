@@ -50,6 +50,9 @@ a {
     outline: none;
     text-decoration: none;
 }
+.fixed-bottom{
+    z-index: 999;
+}
 
 
 .checkbox {
@@ -153,6 +156,7 @@ p {
 .dropdown-menu.show {
     min-width: 160px;
     margin-top: 6px;
+    z-index:1300;
 }
 
 .dropdown-menu[data-bs-popper] {

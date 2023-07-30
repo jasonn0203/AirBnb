@@ -18,6 +18,7 @@ namespace AirBnb.Models
         public string NoiDung { get; set; }
         public int MaPhong { get; set; }
         public int MaKH { get; set; }
+        public Nullable<System.DateTime> NgayBL { get; set; }
     
         public virtual KhachThue KhachThue { get; set; }
         public virtual Phong Phong { get; set; }
