@@ -16,27 +16,46 @@
 
 
     @* PRICE SLIDER *@
+    @Html.Action("PriceSlider", "Home")
 
 
 
 
-    <div class="content">
-        <div class="content__container">
-            <p class="content__container__text">
-                Your
-            </p>
+    <div class="d-flex align-items-center justify-content-between" style="margin-top: 100px; margin-bottom: 75px;">
+        <div class="content">
+            <div class="content__container">
+                <p class="content__container__text">
+                    Your
+                </p>
 
-            <ul class="content__container__list">
-                <li class="content__container__list__item primaryColor">Choices !</li>
-                <li class="content__container__list__item primaryColor">Joys !</li>
-            </ul>
+                <ul class="content__container__list">
+                    <li class="content__container__list__item primaryColor">Choices !</li>
+                    <li class="content__container__list__item primaryColor">Joys !</li>
+                </ul>
+            </div>
         </div>
+
+        @if (ViewBag.NumberOfRooms == null)
+        {
+
+
+            <span></span>
+        }
+        else if (ViewBag.NumberOfRooms == 1)
+        {
+            <span id="numberOfRooms" class="text-white bg-success p-1  fw-medium rounded-2">@ViewBag.NumberOfRooms Room Available</span>
+        }
+        else
+        {
+            <span id="numberOfRooms" class="text-white bg-success p-1  fw-medium rounded-2">@ViewBag.NumberOfRooms Rooms Available</span>
+        }
+
     </div>
 
 
 
 
-    <div class="placeList my-4">
+    <div class="placeList mb-4">
         @foreach (var item in Model)
         {
 
@@ -68,11 +87,11 @@
                         @* Hiển thị trạng thái phòng *@
                         @if (item.TinhTrang)
                         {
-                            <span style="font-size: 12px;" class="text-white bg-danger p-1  fw-medium rounded-2">Booked</span>
+                            <span style="font-size: 12px;" class="text-white bg-danger p-2  fw-medium rounded-2">Booked</span>
                         }
                         else
                         {
-                            <span style="font-size: 12px;" class="text-white bg-success p-1  fw-medium rounded-2">Available</span>
+                            <span style="font-size: 12px;" class="text-white bg-success p-2  fw-medium rounded-2">Available</span>
                         }
 
 

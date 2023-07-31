@@ -1,0 +1,102 @@
+﻿@using AirBnb.Models
+
+
+
+
+<style>
+    .card {
+        width: 500px;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 5px 6px 6px 2px #e9ecef;
+    }
+
+
+
+    .dollar {
+        top: -1.2em !important;
+    }
+
+
+    .amount {
+        font-size: 36px;
+        font-weight: 500;
+    }
+
+    /* Safari and Chrome */
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        background-color: #ff5f63;
+        border-radius: 50%;
+        margin-top: -5px;
+        transform: translateX(-50%)
+    }
+
+
+    /* Edge and IE */
+    input[type="range"]::-ms-thumb {
+        width: 16px;
+        height: 16px;
+        background-color: #ff5f63;
+        border-radius: 50%;
+        margin-top: -5px;
+        transform: translateX(-50%)
+    }
+</style>
+
+
+<div class="card p-3 mx-auto">
+    <h5 class="fw-bold primaryColor">Setup your pricing</h5>
+
+    <div>
+        <sup class="text-muted dollar">MAX $ </sup>
+        <span id="currentPrice" class="amount primaryColor fw-bold">@ViewBag.MinPrice.ToString("0")</span>
+        <span class="text-muted">/ night</span>
+    </div>
+
+
+    <div class="mt-2">
+
+        @using (Html.BeginForm("FilterByPrice", "Home", FormMethod.Post, new { id = "filterForm" }))
+        {
+            <input name="maxPrice" type="hidden" id="selectedPrice" />
+            <input name="maxPrice" id="priceSlider" style="max-width: 100%" type="range" class="form-range d-block" value="@ViewBag.MinPrice.ToString("0")" min="@ViewBag.MinPrice.ToString("0")" max="@ViewBag.MaxPrice.ToString("0")" step="1" placeholder="" />
+            <div class="d-flex justify-content-between">
+                <small class="primaryColor">$@ViewBag.MinPrice.ToString("0")</small>
+                <small class="primaryColor">$@ViewBag.MaxPrice.ToString("0")</small>
+            </div>
+            <div class="d-flex align-items-center justify-content-center my-4">
+                <button class="btn btn-reserve w-100" type="button" onclick="submitForm()">Filter</button>
+            </div>
+        }
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    const priceSlider = document.getElementById('priceSlider');
+    const currentPriceDisplay = document.getElementById('currentPrice');
+    const numberOfRoomsDisplay = document.getElementById('numberOfRooms'); // Lấy phần tử hiển thị số lượng phòng
+
+    priceSlider.addEventListener('input', function () {
+        currentPriceDisplay.textContent = priceSlider.value;
+
+    });
+
+
+     function submitForm() {
+            var selectedPrice = document.getElementById('priceSlider').value;
+            document.getElementById('selectedPrice').value = selectedPrice;
+            var form = document.getElementById('filterForm');
+         form.action = '@Url.Action("FilterByPrice", "Home")/' + "maxprice=" + selectedPrice +"$";
+            form.submit();
+        }
+
+</script>
+
+
+

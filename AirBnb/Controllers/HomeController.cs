@@ -265,5 +265,50 @@ namespace AirBnb.Controllers
             return View("Index", phongList);
         }
 
+        public ActionResult PriceSlider()
+        {
+            // Lấy giá trị giá thấp nhất và giá cao nhất từ database 
+            decimal minPrice = db.Phongs.Min(p => p.Gia1Ngay);
+            decimal maxPrice = db.Phongs.Max(p => p.Gia1Ngay);
+
+            ViewBag.MinPrice = minPrice;
+            ViewBag.MaxPrice = maxPrice;
+
+            // Trả số lượng phòng
+            int numberOfRooms = getNumberOfRoomsByPriceFilter(maxPrice);
+            ViewBag.NumberOfRooms = numberOfRooms;
+
+            return PartialView();
+        }
+
+        //Lọc giá 
+        [HttpPost]
+        public ActionResult FilterByPrice(decimal maxPrice)
+        {
+            // Lấy danh sách phòng theo dk lọc
+            List<Phong> filteredRooms = getRoomByPriceFilter(maxPrice);
+
+            // Update số lượng phòng
+            int numberOfRooms = filteredRooms.Count();
+            ViewBag.NumberOfRooms = numberOfRooms;
+
+            // Return view
+            return View("Index", filteredRooms);
+        }
+
+        private List<Phong> getRoomByPriceFilter(decimal maxPrice)
+        {
+            return db.Phongs.Where(p => p.Gia1Ngay <= maxPrice).ToList();
+        }
+
+        private int getNumberOfRoomsByPriceFilter(decimal maxPrice)
+        {
+            // Lấy danh sách phòng theo dk lọc
+            List<Phong> filteredRooms = getRoomByPriceFilter(maxPrice);
+
+            // trả về số lượng phòng
+            return filteredRooms.Count();
+        }
+
     }
 }

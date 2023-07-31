@@ -402,6 +402,7 @@
     <Content Include="Views\User\Reservations.cshtml" />
     <Content Include="Views\Book\SuccessfullyPayment.cshtml" />
     <Content Include="Views\User\Bills.cshtml" />
+    <Content Include="Views\Home\PriceSlider.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
