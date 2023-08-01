@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -181,10 +182,91 @@ namespace AirBnb.Controllers
 
             roomQuantity = db.Phongs.Count(r => r.MaChuNha == maChuNha);
             ViewBag.SoLuongPhong = roomQuantity;
-           
+
+            //truyền tổng doanh thu
+            decimal totalRevenue = CalculateTotalRevenue(maChuNha);
+            ViewBag.TongDoanhThu = totalRevenue;
+
+            //Tổng KH đặt phòng
+            int numberOfBookings = GetNumberOfBookings(maChuNha);
+            ViewBag.SLDatPhong = numberOfBookings;
+
+
+            List<Phong> rooms = GetRoomList(maChuNha);
+
+            //Lấy comments
+            var comments = GetCommentsByRoomForHost(maChuNha);
+            int totalReviews = GetTotalReviews(rooms);
+
+            ViewBag.Comments = comments;
+            ViewBag.TotalReviews = totalReviews;
+
+
 
             return View();
         }
+
+
+        private decimal CalculateTotalRevenue(int hostId)
+        {
+            //Tính tổng doanh thu
+
+            decimal totalRevenue = db.DonDatPhongs
+                .Where(d => d.Phong.MaChuNha == hostId)
+                .Sum(d => d.TongChiPhi);
+
+            return totalRevenue;
+        }
+
+        private int GetNumberOfBookings(int hostId)
+        {
+            // Tính SL người đã đặt phòng
+
+            int numberOfBookings = db.DonDatPhongs
+                .Count(d => d.Phong.MaChuNha == hostId);
+
+            return numberOfBookings;
+        }
+
+
+        private List<Phong> GetCommentsByRoomForHost(int hostId)
+        {
+            // Lấy các đánh giá của các căn phòng thuộc chủ nhà
+            List<Phong> rooms = GetRoomList(hostId);
+
+            return rooms;
+        }
+
+        private int GetTotalReviews(List<Phong> rooms)
+        {
+            // Tính tổng số lượng đánh giá của tất cả các phòng
+            int totalReviews = rooms.Sum(room => room.DanhGias.Count);
+            return totalReviews;
+        }
+
+        private List<Phong> GetRoomList(int hostId)
+        {
+            return db.Phongs
+                .Where(p => p.MaChuNha == hostId)
+                .Include(p => p.DanhGias.Select(d => d.KhachThue))
+                .ToList();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //===============================
+
 
         public ActionResult RoomManagement()
         {

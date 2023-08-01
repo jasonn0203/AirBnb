@@ -22,7 +22,7 @@ namespace AirBnb.Controllers
             // Lấy tất cả danh sách phòng
             List<Phong> phongList = db.Phongs.ToList();
 
-            // Sắp xếp danh sách phòng theo thứ tự ngẫu nhiên
+            // Sắp xếp danh sách phòng theo thứ tự ngẫu nhiên mỗi khi reload
             Random random = new Random();
             phongList = phongList.OrderBy(x => random.Next()).ToList();
 

@@ -236,6 +236,8 @@ namespace AirBnb.Controllers
             // Lấy thông tin về phòng từ CSDL 
             using (var dbContext = new AirbnbEntities())
             {
+
+
                 var room = dbContext.Phongs.FirstOrDefault(r => r.MaPhong == MaPhong);
 
                 if (room != null)
@@ -286,6 +288,16 @@ namespace AirBnb.Controllers
             // Redirect về trang hiển thị thông tin đặt phòng
             return RedirectToAction("Reservations", "User", new { name = name });
         }
+
+
+
+
+
+
+
+
+
+
 
         //Hủy đặt phòng
         [HttpPost]

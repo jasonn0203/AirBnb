@@ -4,9 +4,16 @@
     Layout = "~/Views/Shared/_HostLayout.cshtml";
 }
 
-      
+<style>
+    .icon-flipped {
+        transform: scaleX(-1);
+        -moz-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        -ms-transform: scaleX(-1);
+    }
+</style>
 
-          <main class="dash-content">
+<main class="dash-content">
     <div class="container-fluid">
         <div class="row dash-row">
             <div class="col-xl-4">
@@ -18,83 +25,144 @@
                         </div>
                         <div class="stats-data">
                             <div class="stats-number">@ViewBag.SoLuongPhong</div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
+            @{
+                // Thay đổi định dạng hiển thị doanh thu
+                decimal totalRevenue = decimal.Parse(@ViewBag.TongDoanhThu.ToString());
+            }
+
+
             <div class="col-xl-4">
                 <div class="stats stats-success ">
-                    <h3 class="stats-title"> Revenue </h3>
+                    <h3 class="stats-title"> Total Revenue </h3>
                     <div class="stats-content">
                         <div class="stats-icon">
-                            <i style="color:white;" class="fas fa-cart-arrow-down"></i>
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
                         </div>
                         <div class="stats-data">
-                            <div class="stats-number">$25,541</div>
-                            <div class="stats-change">
-                                <span class="stats-percentage">+17.5%</span>
-                                <span class="stats-timeframe">from last month</span>
-                                
-                            </div>
+                            <div class="stats-number">$@string.Format("{0:N}", totalRevenue)</div>
+                            @*<div class="stats-change">
+                                    <span class="stats-percentage">+17.5%</span>
+                                    <span class="stats-timeframe">from last month</span>
+
+                                </div>*@
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-4">
                 <div class="stats stats-danger">
-                    <h3 class="stats-title"> Open tickets </h3>
+                    <h3 class="stats-title"> Booked Customer </h3>
                     <div class="stats-content">
                         <div class="stats-icon">
-                            <i style="color:white;" class="fas fa-phone"></i>
+                            <i class="fa-solid fa-face-laugh-squint"></i>
                         </div>
                         <div class="stats-data">
-                            <div class="stats-number">5</div>
+                            <div class="stats-number">@ViewBag.SLDatPhong </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
 
-            <div class="col">
-                <div class="card easion-card">
-                    <div class="card-header">
-                        <div class="easion-card-icon">
-                            <i class="fas fa-bell"></i>
-                        </div>
-                        <div class="easion-card-title"> Notifications </div>
+
+        @* Comment List *@
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="card easion-card">
+                <div class="card-header">
+                    <div class="easion-card-icon me-2">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="card-body ">
-                        <div class="notifications">
-                            <a href="#!" class="notification">
-                                <div class="notification-icon">
-                                    <i class="fas fa-inbox"></i>
+                    <div class="easion-card-title fs-3 fw-bold primaryColor">Room Reviews</div>
+                </div>
+
+                <div class="card-body">
+                    <div class="notifications">
+                        @foreach (var room in ViewBag.Comments)
+                        {
+                            <div class="notification">
+
+                                <div class="notification-text">
+                                    <i class="fas fa-inbox me-2"></i>
+
+                                    Room :
+                                    <span class="primaryColor"> @room.TieuDe </span>
                                 </div>
-                                <div class="notification-text">New comment</div>
-                                <span class="notification-time">21 days ago</span>
-                            </a>
-                            <a href="#!" class="notification">
-                                <div class="notification-icon">
-                                    <i class="fas fa-inbox"></i>
-                                </div>
-                                <div class="notification-text">New comment</div>
-                                <span class="notification-time">21 days ago</span>
-                            </a>
-                            <a href="#!" class="notification">
-                                <div class="notification-icon">
-                                    <i class="fas fa-inbox"></i>
-                                </div>
-                                <div class="notification-text">New comment</div>
-                                <span class="notification-time">21 days ago</span>
-                            </a>
-                            <div class="notifications-show-all">
-                                <a href="#!">Show all</a>
+
+                                <div class="notification-time">Total Reviews: @room.DanhGias.Count</div>
+
                             </div>
-                        </div>
+                        }
                     </div>
+                </div>
+
+                <div class="notifications-show-all d-flex align-items-center justify-content-center mb-4 ">
+                    <a class="primaryColor fw-medium" href="#!">Show all</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    @* Modal Comments *@
+
+    <!-- Modal -->
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog custom-modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">@ViewBag.TotalReviews Room Reviews</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Nội dung chi tiết đánh giá-->
+                    @foreach (var comment in ViewBag.Comments)
+                    {
+                        foreach (var room in comment.DanhGias)
+                        {
+                            <div style="border-color: #ff5f63!important" class=" border rounded-4 border-end-0 border-start-0 my-4 p-4" id="reviewContent">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <p class="primaryColor fs-4 fw-medium">@comment.TieuDe</p>
+                                    <img style="max-width: 120px;" class="object-fit-cover h-auto rounded-2" src="@room.Phong.HinhAnh1" alt="Room image" />
+                                </div>
+
+                                <p class="text-opacity-75 mb-2">@room.KhachThue.Ten</p>
+                                <small class="text-opacity-25">@room.NgayBL</small>
+
+                                <div class="d-flex align-items-center column-gap-2 mt-2">
+                                    <i class="fa-solid fa-reply icon-flipped primaryColor"></i>
+                                    <strong class="fs-5 ">@room.NoiDung</strong>
+                                </div>
+
+                            </div>
+                        }
+                    }
+
                 </div>
             </div>
         </div>
     </div>
+
+
+
 </main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Xử lý sự kiện khi người dùng click vào "Show all"
+        $('.notifications-show-all a').click(function (e) {
+            e.preventDefault();
+
+
+
+            $('#reviewModal').modal('show');
+        });
+    });
+</script>

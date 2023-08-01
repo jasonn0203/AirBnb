@@ -1663,9 +1663,9 @@ input[type="date"] {
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     padding: 8px 32px;
     color: #515151;
 }
@@ -1681,22 +1681,21 @@ input[type="date"] {
 }
 
 .notification-time {
-    margin-left: auto;
     opacity: .8;
 }
 
 .notifications-show-all {
     margin-top: 8px;
-    margin-left: 67px;
 }
 
     .notifications-show-all a {
-        color: #515151;
+
         text-decoration: underline;
     }
 
         .notifications-show-all a:focus, .notifications-show-all a:hover, .notifications-show-all a:active {
-            color: #515151;
+            color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
+            transition: 0.25s ease-in-out;
         }
 
 .table-in-card {
@@ -2052,6 +2051,8 @@ input[type="date"] {
     background: #fff;
     margin-bottom: 30px;
     overflow: hidden;
+    max-width: 350px;
+    min-width: 550px;
 }
 
     .easion-card .card-header {
@@ -2079,7 +2080,10 @@ input[type="date"] {
     justify-content: center;
     display: none;
 }
+.custom-modal-dialog {
+    max-width: 750px;
 
+}
 .modal-overlay {
     position: fixed;
     top: 0;

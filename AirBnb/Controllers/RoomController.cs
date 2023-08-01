@@ -24,8 +24,11 @@ namespace AirBnb.Controllers
                 commentList = db.DanhGias.Where(dg => dg.MaPhong == roomDetail.MaPhong).ToList();
             }
 
-            //ViewBag.RoomDetail = roomDetail;
+
             ViewBag.CommentList = commentList;
+
+
+
 
             return View(roomDetail);
         }
@@ -36,7 +39,7 @@ namespace AirBnb.Controllers
 
         //POST
         [HttpPost]
-        public ActionResult AddComment(string comment, int MaPhong, int MaKH,string TieuDe)
+        public ActionResult AddComment(string comment, int MaPhong, int MaKH, string TieuDe)
         {
 
             if (Session["KhachThue"] == null)
