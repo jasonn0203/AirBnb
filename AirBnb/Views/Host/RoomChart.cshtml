@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "RoomChart";
+    Layout = "~/Views/Shared/_HostLayout.cshtml";
+}
+
+<div class="container-fluid my-4">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="text-center primaryColor fw-bold">Room Chart</h2>
+            <div class="my-4" style="width: 100%; max-width: 800px; margin: auto;">
+                <canvas id="roomRentChart" width="800" height="400"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h2 class="text-center primaryColor fw-bold">Revenue Chart</h2>
+            <div class="my-4" style="width: 100%; max-width: 400px; margin: auto;">
+                <canvas id="revenueChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
+
+@* Biểu đồ thuê phòng *@
+<script>
+    // Lấy dữ liệu từ ViewBag
+    var dates = @Html.Raw(Json.Encode(ViewBag.Dates));
+    var counts = @Html.Raw(Json.Encode(ViewBag.Counts));
+
+    // Tạo object để lưu trữ các ngày và số lượng tương ứng
+    var uniqueDates = {};
+    for (var i = 0; i < dates.length; i++) {
+        if (uniqueDates.hasOwnProperty(dates[i])) {
+            // Nếu ngày đã tồn tại trong object, tăng số lượng tương ứng
+            uniqueDates[dates[i]] += counts[i];
+        } else {
+            // Nếu ngày chưa tồn tại trong object, thêm vào với số lượng hiện tại
+            uniqueDates[dates[i]] = counts[i];
+        }
+    }
+
+    // Chuyển object thành mảng để sử dụng trong biểu đồ
+    var uniqueDatesArray = Object.keys(uniqueDates);
+    var uniqueCountsArray = Object.values(uniqueDatesArray).map(date => uniqueDates[date]);
+
+    // Tạo biểu đồ bằng Chart.js
+    var ctx = document.getElementById('roomRentChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: uniqueDatesArray,
+            datasets: [{
+                label: 'Số lượng thuê phòng',
+                data: uniqueCountsArray,
+                backgroundColor: '#FF5F63',
+                borderColor: '#FFFFFF',
+                borderWidth: 1,
+                barPercentage: 0.5,
+                barThickness: 50,
+                maxBarThickness: 100,
+                minBarLength: 100,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+
+
+@* Biểu đồ doanh thu *@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
+<script>
+    // Lấy dữ liệu từ ViewBag
+    var dates = @Html.Raw(Json.Encode(ViewBag.RevenueDates));
+    var revenues = @Html.Raw(Json.Encode(ViewBag.Revenue));
+
+    function formatDate(dateString) {
+        // Tách giá trị timestamp từ chuỗi "/Date(1609...)/"
+        var timestamp = parseInt(dateString.substr(6));
+
+        // Tạo đối tượng ngày từ timestamp
+        var date = new Date(timestamp);
+
+        // Trả về định dạng ngày tháng dd-MM-yyyy
+        return date.toLocaleDateString("en-GB");
+    }
+    function formatCurrency(value) {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+
+
+    // Chuyển đổi định dạng ngày tháng trong mảng dates
+    var formattedDates = dates.map(formatDate);
+
+
+    // Tạo biểu đồ doughnut bằng Chart.js
+    var ctx = document.getElementById('revenueChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: formattedDates,
+            datasets: [{
+                label: 'Doanh thu',
+                data: revenues,
+                backgroundColor: [
+                    '#FF5F63',
+                    '#FFC845',
+                    '#61D9A5',
+                    '#36A2EB',
+                    '#C1C1C1',
+                    '#FFA500',
+                    '#9932CC',
+                    '#FF1493',
+                ],
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            var label = tooltipItem.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            var value = tooltipItem.raw || '';
+                            return label + formatCurrency(value);
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>

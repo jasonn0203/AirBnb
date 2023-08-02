@@ -253,6 +253,62 @@ namespace AirBnb.Controllers
         }
 
 
+        //===============================
+        //Chart
+        public ActionResult RoomChart(int maChuNha)
+        {
+            List<Phong> rooms = new List<Phong>();
+            using (var dbContext = new AirbnbEntities())
+            {
+                rooms = dbContext.Phongs.Where(r => r.MaChuNha == maChuNha).ToList();
+            }
+
+            // Xử lý dữ liệu để lấy số lượng thuê phòng theo ngày đặt
+            var rentCountByDate = rooms.Join(db.DonDatPhongs,
+                                  r => r.MaPhong,
+                                  d => d.MaPhong,
+                                  (r, d) => new { Date = d.NgayDat, Count = 1 })
+                            .GroupBy(rd => rd.Date)
+                            .Select(g => new { Date = g.Key, Count = g.Sum(rd => rd.Count) })
+                            .Distinct() 
+                            .OrderBy(rd => rd.Date)
+                            .ToList();
+
+
+            // Chuyển dữ liệu thành các mảng để sử dụng trong biểu đồ
+            var dates = rentCountByDate.Select(rd => rd.Date.ToString("dd-MM-yyyy")).ToArray();
+            var counts = rentCountByDate.Select(rd => rd.Count).ToArray();
+
+            // Truyền dữ liệu vào ViewBag để sử dụng trong View
+            ViewBag.Dates = dates;
+            ViewBag.Counts = counts;
+
+            //Doanh thu chart
+
+            var revenueByDate = db.DonDatPhongs
+                           .Where(d => d.Phong.MaChuNha == maChuNha) // Filter dua theo machunha
+                           .GroupBy(d => DbFunctions.TruncateTime(d.NgayDat))
+                           .Select(g => new { Date = g.Key, Revenue = g.Sum(d => d.TongChiPhi) })
+                           .AsEnumerable() 
+                           .Select(rd => new { Date = rd.Date, rd.Revenue })
+                           .ToList();
+
+
+
+            var revenueDate = revenueByDate.Select(rd => rd.Date).ToArray();
+            var revenues = revenueByDate.Select(rd => rd.Revenue).ToArray();
+
+
+
+            ViewBag.RevenueDates = revenueDate;
+            ViewBag.Revenue = revenues;
+
+            return View();
+        }
+
+
+
+
 
 
 

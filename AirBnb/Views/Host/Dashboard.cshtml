@@ -16,19 +16,24 @@
 <main class="dash-content">
     <div class="container-fluid">
         <div class="row dash-row">
-            <div class="col-xl-4">
-                <div class="stats stats-primary">
-                    <h3 class="stats-title"> Hosted Room </h3>
-                    <div class="stats-content">
-                        <div class="stats-icon">
-                            <i style="color:white;" class="fas fa-home"></i>
-                        </div>
-                        <div class="stats-data">
-                            <div class="stats-number">@ViewBag.SoLuongPhong</div>
 
+            <div class="col-xl-4">
+                <a href="@Url.Action("RoomManagement","Host")">
+
+                    <div class="stats stats-primary">
+                        <h3 class="stats-title"> Hosted Room </h3>
+                        <div class="stats-content">
+                            <div class="stats-icon">
+                                <i style="color:white;" class="fas fa-home"></i>
+                            </div>
+                            <div class="stats-data">
+                                <div class="stats-number">@ViewBag.SoLuongPhong</div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
+
             </div>
             @{
                 // Thay đổi định dạng hiển thị doanh thu
@@ -131,8 +136,18 @@
                                     <img style="max-width: 120px;" class="object-fit-cover h-auto rounded-2" src="@room.Phong.HinhAnh1" alt="Room image" />
                                 </div>
 
-                                <p class="text-opacity-75 mb-2">@room.KhachThue.Ten</p>
-                                <small class="text-opacity-25">@room.NgayBL</small>
+
+                                <div class="d-flex align-items-center mb-2 ">
+
+                                    <i class="fa-solid fa-circle-user me-2"></i>
+                                    <small class="text-opacity-75">@room.KhachThue.Ten</small>
+                                </div>
+
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fa-solid fa-clock  me-2"></i>
+                                    <small class="text-opacity-25">@room.NgayBL</small>
+                                </div>
+
 
                                 <div class="d-flex align-items-center column-gap-2 mt-2">
                                     <i class="fa-solid fa-reply icon-flipped primaryColor"></i>
