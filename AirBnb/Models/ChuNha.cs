@@ -18,6 +18,7 @@ namespace AirBnb.Models
         public ChuNha()
         {
             this.Phongs = new HashSet<Phong>();
+            this.KhuyenMais = new HashSet<KhuyenMai>();
         }
     
         public int MaChuNha { get; set; }
@@ -31,5 +32,7 @@ namespace AirBnb.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Phong> Phongs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhuyenMai> KhuyenMais { get; set; }
     }
 }

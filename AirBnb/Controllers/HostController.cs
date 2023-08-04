@@ -270,7 +270,7 @@ namespace AirBnb.Controllers
                                   (r, d) => new { Date = d.NgayDat, Count = 1 })
                             .GroupBy(rd => rd.Date)
                             .Select(g => new { Date = g.Key, Count = g.Sum(rd => rd.Count) })
-                            .Distinct() 
+                            .Distinct()
                             .OrderBy(rd => rd.Date)
                             .ToList();
 
@@ -289,7 +289,7 @@ namespace AirBnb.Controllers
                            .Where(d => d.Phong.MaChuNha == maChuNha) // Filter dua theo machunha
                            .GroupBy(d => DbFunctions.TruncateTime(d.NgayDat))
                            .Select(g => new { Date = g.Key, Revenue = g.Sum(d => d.TongChiPhi) })
-                           .AsEnumerable() 
+                           .AsEnumerable()
                            .Select(rd => new { Date = rd.Date, rd.Revenue })
                            .ToList();
 
@@ -354,11 +354,19 @@ namespace AirBnb.Controllers
             // Logic để lấy danh sách danh mục phòng, khuyến mãi (để hiển thị cho form thêm phòng)
 
 
-            //List<DanhMucPhong> danhMucList = db.DanhMucPhongs.ToList();
-            //List<KhuyenMai> khuyenMaiList = db.KhuyenMais.ToList();
-
             ViewBag.MaDanhMuc = new SelectList(db.DanhMucPhongs, "MaDanhMuc", "TenDanhMuc");
-            ViewBag.MaKM = new SelectList(db.KhuyenMais, "MaKM", "TenKM");
+            // Lấy đối tượng ChuNha từ session
+            var chuNha = (ChuNha)Session["ChuNha"];
+
+            // Lấy danh sách khuyến mãi của tài khoản chủ nhà đang đăng nhập
+            var kmList = db.ChuNhas
+                           .Where(c => c.MaChuNha == chuNha.MaChuNha)
+                           .SelectMany(c => c.KhuyenMais)
+                           .ToList();
+
+            ViewBag.MaKM = new SelectList(kmList, "MaKM", "TenKM");
+
+
 
 
             return View();
@@ -368,10 +376,11 @@ namespace AirBnb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateRoom([Bind(Include = "TieuDe, DiaChi, MoTa, Gia1Ngay, DieuKhoan, SLKhach, NgayBatDau, NgayKetThuc, MaDanhMuc, MaKM, HinhAnh1,HinhAnh2,HinhAnh3,HinhAnh4,HinhAnh5, TinhTrang")] Phong phong)
         {
+            // Lấy đối tượng ChuNha từ session
+            var chuNha = (ChuNha)Session["ChuNha"];
             if (ModelState.IsValid)
             {
-                // Lấy đối tượng ChuNha từ session
-                var chuNha = (ChuNha)Session["ChuNha"];
+
 
                 // Gán MaChuNha từ đối tượng chuNha vào phong
                 phong.MaChuNha = chuNha.MaChuNha;
@@ -386,8 +395,15 @@ namespace AirBnb.Controllers
                 return RedirectToAction("RoomManagement");
             }
 
+            // Lấy danh sách khuyến mãi của tài khoản chủ nhà đang đăng nhập
+            var kmList = db.ChuNhas
+                           .Where(c => c.MaChuNha == chuNha.MaChuNha)
+                           .SelectMany(c => c.KhuyenMais)
+                           .ToList();
+
             ViewBag.MaDanhMuc = new SelectList(db.DanhMucPhongs, "MaDanhMuc", "TenDanhMuc", phong.MaDanhMuc);
-            ViewBag.MaKM = new SelectList(db.KhuyenMais, "MaKM", "TenKM", phong.MaKM);
+            ViewBag.MaKM = new SelectList(kmList, "MaKM", "TenKM", phong.MaKM);
+
             // Nếu dữ liệu không hợp lệ, quay trở lại view create để hiển thị lỗi
             return View(phong);
         }
@@ -406,10 +422,18 @@ namespace AirBnb.Controllers
             {
                 return HttpNotFound();
             }
+            // Lấy đối tượng ChuNha từ session
+            var chuNha = (ChuNha)Session["ChuNha"];
+
+            // Lấy danh sách khuyến mãi của tài khoản chủ nhà đang đăng nhập
+            var kmList = db.ChuNhas
+                           .Where(c => c.MaChuNha == chuNha.MaChuNha)
+                           .SelectMany(c => c.KhuyenMais)
+                           .ToList();
 
 
             ViewBag.MaDanhMuc = new SelectList(db.DanhMucPhongs, "MaDanhMuc", "TenDanhMuc", room.MaDanhMuc);
-            ViewBag.MaKM = new SelectList(db.KhuyenMais, "MaKM", "TenKM", room.MaKM);
+            ViewBag.MaKM = new SelectList(kmList, "MaKM", "TenKM", room.MaKM);
             return View(room);
         }
 
@@ -417,6 +441,8 @@ namespace AirBnb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditRoom([Bind(Include = "MaPhong, TieuDe, DiaChi, MoTa, Gia1Ngay, DieuKhoan, SLKhach, NgayBatDau, NgayKetThuc, MaDanhMuc, MaKM, HinhAnh1, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5, TinhTrang")] Phong phong)
         {
+            // Lấy đối tượng ChuNha từ session
+            var chuNha = (ChuNha)Session["ChuNha"];
             if (ModelState.IsValid)
             {
                 var getRoomInDb = db.Phongs.Find(phong.MaPhong);
@@ -448,8 +474,15 @@ namespace AirBnb.Controllers
                 return RedirectToAction("RoomManagement");
             }
 
+
+            // Lấy danh sách khuyến mãi của tài khoản chủ nhà đang đăng nhập
+            var kmList = db.ChuNhas
+                           .Where(c => c.MaChuNha == chuNha.MaChuNha)
+                           .SelectMany(c => c.KhuyenMais)
+                           .ToList();
+
             ViewBag.MaDanhMuc = new SelectList(db.DanhMucPhongs, "MaDanhMuc", "TenDanhMuc", phong.MaDanhMuc);
-            ViewBag.MaKM = new SelectList(db.KhuyenMais, "MaKM", "TenKM", phong.MaKM);
+            ViewBag.MaKM = new SelectList(kmList, "MaKM", "TenKM", phong.MaKM);
 
             return View(phong);
         }
@@ -467,6 +500,67 @@ namespace AirBnb.Controllers
             db.Phongs.Remove(room);
             db.SaveChanges();
             return RedirectToAction("RoomManagement");
+        }
+
+
+
+
+        public ActionResult Promotion()
+        {
+            // Check chủ nhà có đăng nhập chưa, nếu chưa chuyển về trang đăng nhập
+            if (Session["ChuNha"] == null)
+            {
+                return RedirectToAction("HostSignIn");
+            }
+
+            // Lấy mã chủ nhà từ session
+            var maChuNha = ((ChuNha)Session["ChuNha"]).MaChuNha;
+
+            // Lấy danh sách các phòng thuộc mã chủ nhà
+            var kmList = db.KhuyenMais
+                 .Where(km => km.MaChuNha == maChuNha)
+                 .ToList();
+
+            if (kmList == null || kmList.Count == 0)
+            {
+                ViewBag.Message = "No Promotion was found! Please add a new one.";
+                return View();
+            }
+
+            return View(kmList);
+        }
+
+
+
+        public ActionResult CreatePromotion()
+        {
+            return View();
+        }
+
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePromotion(KhuyenMai promotion)
+        {
+            if (ModelState.IsValid)
+            {
+                // Lấy mã chủ nhà từ session
+                var maChuNha = ((ChuNha)Session["ChuNha"]).MaChuNha;
+
+                try
+                {
+                    promotion.MaChuNha = maChuNha;
+                    db.KhuyenMais.Add(promotion);
+                    db.SaveChanges();
+                    return RedirectToAction("Promotion");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "An error occurred while adding the promotion: " + ex.Message;
+                }
+            }
+
+            return View(promotion);
         }
 
 

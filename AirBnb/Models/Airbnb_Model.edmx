@@ -79,6 +79,7 @@
           <Property Name="NgayBD" Type="date" Nullable="false" />
           <Property Name="NgayKT" Type="date" Nullable="false" />
           <Property Name="UuDai" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="MaChuNha" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Phong">
           <Key>
@@ -244,6 +245,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_KhuyenMai_ChuNha">
+          <End Role="ChuNha" Type="Self.ChuNha" Multiplicity="1" />
+          <End Role="KhuyenMai" Type="Self.KhuyenMai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChuNha">
+              <PropertyRef Name="MaChuNha" />
+            </Principal>
+            <Dependent Role="KhuyenMai">
+              <PropertyRef Name="MaChuNha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="UpdateGia1Ngay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="AirbnbModelStoreContainer">
           <EntitySet Name="ChuNha" EntityType="Self.ChuNha" Schema="dbo" store:Type="Tables" />
@@ -299,6 +312,10 @@
             <End Role="Phong" EntitySet="Phong" />
             <End Role="YeuThich" EntitySet="YeuThich" />
           </AssociationSet>
+          <AssociationSet Name="FK_KhuyenMai_ChuNha" Association="Self.FK_KhuyenMai_ChuNha">
+            <End Role="ChuNha" EntitySet="ChuNha" />
+            <End Role="KhuyenMai" EntitySet="KhuyenMai" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -317,6 +334,7 @@
           <Property Name="MatKhau" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SDT" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Phongs" Relationship="Self.FK__Phong__MaChuNha__30F848ED" FromRole="ChuNha" ToRole="Phong" />
+          <NavigationProperty Name="KhuyenMais" Relationship="AirbnbModel.FK_KhuyenMai_ChuNha" FromRole="ChuNha" ToRole="KhuyenMai" />
         </EntityType>
         <EntityType Name="DanhGia">
           <Key>
@@ -392,6 +410,8 @@
           <Property Name="NgayKT" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="UuDai" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <NavigationProperty Name="Phongs" Relationship="Self.FK__Phong__MaKM__31EC6D26" FromRole="KhuyenMai" ToRole="Phong" />
+          <Property Name="MaChuNha" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChuNha" Relationship="AirbnbModel.FK_KhuyenMai_ChuNha" FromRole="KhuyenMai" ToRole="ChuNha" />
         </EntityType>
         <EntityType Name="Phong">
           <Key>
@@ -620,7 +640,23 @@
             <End Role="YeuThich" EntitySet="YeuThiches" />
           </AssociationSet>
           <FunctionImport Name="UpdateGia1Ngay" />
+          <AssociationSet Name="FK_KhuyenMai_ChuNha" Association="AirbnbModel.FK_KhuyenMai_ChuNha">
+            <End Role="ChuNha" EntitySet="ChuNhas" />
+            <End Role="KhuyenMai" EntitySet="KhuyenMais" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_KhuyenMai_ChuNha">
+          <End Type="AirbnbModel.ChuNha" Role="ChuNha" Multiplicity="1" />
+          <End Type="AirbnbModel.KhuyenMai" Role="KhuyenMai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChuNha">
+              <PropertyRef Name="MaChuNha" />
+            </Principal>
+            <Dependent Role="KhuyenMai">
+              <PropertyRef Name="MaChuNha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -701,6 +737,7 @@
           <EntitySetMapping Name="KhuyenMais">
             <EntityTypeMapping TypeName="AirbnbModel.KhuyenMai">
               <MappingFragment StoreEntitySet="KhuyenMai">
+                <ScalarProperty Name="MaChuNha" ColumnName="MaChuNha" />
                 <ScalarProperty Name="MaKM" ColumnName="MaKM" />
                 <ScalarProperty Name="TenKM" ColumnName="TenKM" />
                 <ScalarProperty Name="NgayBD" ColumnName="NgayBD" />

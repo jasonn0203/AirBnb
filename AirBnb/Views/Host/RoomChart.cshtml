@@ -90,7 +90,7 @@
     var revenues = @Html.Raw(Json.Encode(ViewBag.Revenue));
 
     function formatDate(dateString) {
-        // Tách giá trị timestamp từ chuỗi "/Date(1609...)/"
+        // Tách giá trị 
         var timestamp = parseInt(dateString.substr(6));
 
         // Tạo đối tượng ngày từ timestamp

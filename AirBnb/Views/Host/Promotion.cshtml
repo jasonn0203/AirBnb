@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AirBnb.Models.KhuyenMai>
+
+@{
+    ViewBag.Title = "Promotion";
+    Layout = "~/Views/Shared/_HostLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <h2 class="primaryColor fs-2 fw-bold my-4 text-center">Promotion</h2>
+
+    <p class="bg-body my-4">
+        @Html.ActionLink("Create New", "CreatePromotion", null, new { @class = "text-white fs-5 fw-bold bg-primary p-2 rounded-2" })
+        <hr class="primaryColor opacity-100" />
+    </p>
+
+    @if (ViewBag.Message != null)
+    {
+
+        <p class="d-flex align-items-center justify-content-center text-danger fw-bolder fs-2">@ViewBag.Message</p>
+
+
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenKM)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayBD)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayKT)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UuDai)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenKM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayBD)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayKT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UuDai)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MaKM }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MaKM }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MaKM })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+
+</div>

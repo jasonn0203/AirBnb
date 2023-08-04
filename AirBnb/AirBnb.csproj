@@ -404,6 +404,8 @@
     <Content Include="Views\User\Bills.cshtml" />
     <Content Include="Views\Home\PriceSlider.cshtml" />
     <Content Include="Views\Host\RoomChart.cshtml" />
+    <Content Include="Views\Host\Promotion.cshtml" />
+    <Content Include="Views\Host\CreatePromotion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -439,7 +441,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49789</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44335/</IISUrl>
+          <IISUrl>https://localhost:44334/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

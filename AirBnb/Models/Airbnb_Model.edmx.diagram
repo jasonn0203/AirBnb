@@ -25,6 +25,7 @@
         <AssociationConnector Association="AirbnbModel.FK__YeuThich__MaKH__36B12243" ManuallyRouted="false" />
         <AssociationConnector Association="AirbnbModel.FK__Phong__MaKM__31EC6D26" ManuallyRouted="false" />
         <AssociationConnector Association="AirbnbModel.FK__YeuThich__MaPhon__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="AirbnbModel.FK_KhuyenMai_ChuNha" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

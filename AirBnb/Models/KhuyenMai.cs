@@ -25,8 +25,10 @@ namespace AirBnb.Models
         public System.DateTime NgayBD { get; set; }
         public System.DateTime NgayKT { get; set; }
         public decimal UuDai { get; set; }
+        public int MaChuNha { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Phong> Phongs { get; set; }
+        public virtual ChuNha ChuNha { get; set; }
     }
 }
