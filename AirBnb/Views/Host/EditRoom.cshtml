@@ -189,14 +189,18 @@
 
 
 
-@*<script>
+<script>
+    // Get the current date and format it for setting the minimum value of the date picker
+    var today = new Date();
+    var todayFormatted = today.toISOString().split('T')[0];
+
     // Lắng nghe sự kiện khi trường Ngày bắt đầu thay đổi
     document.getElementById('start').addEventListener('change', function () {
         var startDate = new Date(this.value); // Lấy giá trị Ngày bắt đầu
 
         // Tạo ngày tối đa cho trường Ngày kết thúc
         var maxEndDate = new Date(startDate);
-        maxEndDate.setDate(maxEndDate.getDate() + 5); // Tăng giá trị Ngày kết thúc lên 5 ngày từ Ngày bắt đầu
+        maxEndDate.setDate(maxEndDate.getDate() + 30); // Tăng giá trị Ngày kết thúc lên 30 ngày từ Ngày bắt đầu
 
         // Định dạng ngày cho trường Ngày kết thúc
         var maxEndYear = maxEndDate.getFullYear();
@@ -215,13 +219,19 @@
         var startDate = new Date(document.getElementById('start').value); // Lấy giá trị Ngày bắt đầu
         var endDate = new Date(this.value); // Lấy giá trị Ngày kết thúc
 
-        // Kiểm tra điều kiện Ngày kết thúc không được nhỏ hơn Ngày bắt đầu và không được vượt quá 5 ngày
+        // Kiểm tra điều kiện Ngày kết thúc không được nhỏ hơn Ngày bắt đầu và không được vượt quá 30 ngày
         var differenceInTime = endDate.getTime() - startDate.getTime();
         var differenceInDays = differenceInTime / (1000 * 3600 * 24);
-        if (endDate < startDate || differenceInDays > 5) {
-            this.setCustomValidity('Ngày kết thúc phải lớn hơn hoặc bằng Ngày bắt đầu và không vượt quá 5 ngày.');
+        if (endDate < startDate || differenceInDays > 30) {
+            this.setCustomValidity('Ngày kết thúc phải lớn hơn hoặc bằng Ngày bắt đầu và không vượt quá 30 ngày.');
         } else {
             this.setCustomValidity('');
         }
     });
-</script>*@
+
+    // Set the minimum value for both date pickers to the current date
+    document.getElementById('start').setAttribute('min', todayFormatted);
+    document.getElementById('end').setAttribute('min', todayFormatted);
+</script>
+
+

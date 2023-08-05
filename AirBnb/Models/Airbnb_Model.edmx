@@ -258,6 +258,7 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="UpdateGia1Ngay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateRentalDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="AirbnbModelStoreContainer">
           <EntitySet Name="ChuNha" EntityType="Self.ChuNha" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
@@ -644,6 +645,7 @@
             <End Role="ChuNha" EntitySet="ChuNhas" />
             <End Role="KhuyenMai" EntitySet="KhuyenMais" />
           </AssociationSet>
+          <FunctionImport Name="UpdateRentalDates" />
         </EntityContainer>
         <Association Name="FK_KhuyenMai_ChuNha">
           <End Type="AirbnbModel.ChuNha" Role="ChuNha" Multiplicity="1" />
@@ -781,6 +783,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UpdateGia1Ngay" FunctionName="AirbnbModel.Store.UpdateGia1Ngay" />
+          <FunctionImportMapping FunctionImportName="UpdateRentalDates" FunctionName="AirbnbModel.Store.UpdateRentalDates" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

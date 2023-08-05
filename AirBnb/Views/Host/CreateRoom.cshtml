@@ -175,38 +175,47 @@
 
 
 <script>
-        // Lắng nghe sự kiện khi trường Ngày bắt đầu thay đổi
-        document.getElementById('start').addEventListener('change', function () {
-            var startDate = new Date(this.value); // Lấy giá trị Ngày bắt đầu
+    // Get the current date and format it for setting the minimum value of the date picker
+    var today = new Date();
+    var todayFormatted = today.toISOString().split('T')[0];
 
-            // Tạo ngày tối đa cho trường Ngày kết thúc
-            var maxEndDate = new Date(startDate);
-            maxEndDate.setDate(maxEndDate.getDate() + 30); // Tăng giá trị Ngày kết thúc lên 5 ngày từ Ngày bắt đầu
+    // Lắng nghe sự kiện khi trường Ngày bắt đầu thay đổi
+    document.getElementById('start').addEventListener('change', function () {
+        var startDate = new Date(this.value); // Lấy giá trị Ngày bắt đầu
 
-            // Định dạng ngày cho trường Ngày kết thúc
-            var maxEndYear = maxEndDate.getFullYear();
-            var maxEndMonth = (maxEndDate.getMonth() + 1).toString().padStart(2, '0');
-            var maxEndDay = maxEndDate.getDate().toString().padStart(2, '0');
-            var formattedMaxEndDate = maxEndYear + '-' + maxEndMonth + '-' + maxEndDay;
+        // Tạo ngày tối đa cho trường Ngày kết thúc
+        var maxEndDate = new Date(startDate);
+        maxEndDate.setDate(maxEndDate.getDate() + 30); // Tăng giá trị Ngày kết thúc lên 30 ngày từ Ngày bắt đầu
 
-            // Cập nhật giá trị Ngày kết thúc và giới hạn max của trường Ngày kết thúc
-            document.getElementById('end').value = '';
-            document.getElementById('end').setAttribute('min', this.value);
-            document.getElementById('end').setAttribute('max', formattedMaxEndDate);
-        });
+        // Định dạng ngày cho trường Ngày kết thúc
+        var maxEndYear = maxEndDate.getFullYear();
+        var maxEndMonth = (maxEndDate.getMonth() + 1).toString().padStart(2, '0');
+        var maxEndDay = maxEndDate.getDate().toString().padStart(2, '0');
+        var formattedMaxEndDate = maxEndYear + '-' + maxEndMonth + '-' + maxEndDay;
 
-        // Lắng nghe sự kiện khi trường Ngày kết thúc thay đổi
-        document.getElementById('end').addEventListener('change', function () {
-            var startDate = new Date(document.getElementById('start').value); // Lấy giá trị Ngày bắt đầu
-            var endDate = new Date(this.value); // Lấy giá trị Ngày kết thúc
+        // Cập nhật giá trị Ngày kết thúc và giới hạn max của trường Ngày kết thúc
+        document.getElementById('end').value = '';
+        document.getElementById('end').setAttribute('min', this.value);
+        document.getElementById('end').setAttribute('max', formattedMaxEndDate);
+    });
 
-            // Kiểm tra điều kiện Ngày kết thúc không được nhỏ hơn Ngày bắt đầu và không được vượt quá 5 ngày
-            var differenceInTime = endDate.getTime() - startDate.getTime();
-            var differenceInDays = differenceInTime / (1000 * 3600 * 24);
-            if (endDate < startDate || differenceInDays > 5) {
-                this.setCustomValidity('Ngày kết thúc phải lớn hơn hoặc bằng Ngày bắt đầu và không vượt quá 5 ngày.');
-            } else {
-                this.setCustomValidity('');
-            }
-        });
-    </script>
+    // Lắng nghe sự kiện khi trường Ngày kết thúc thay đổi
+    document.getElementById('end').addEventListener('change', function () {
+        var startDate = new Date(document.getElementById('start').value); // Lấy giá trị Ngày bắt đầu
+        var endDate = new Date(this.value); // Lấy giá trị Ngày kết thúc
+
+        // Kiểm tra điều kiện Ngày kết thúc không được nhỏ hơn Ngày bắt đầu và không được vượt quá 30 ngày
+        var differenceInTime = endDate.getTime() - startDate.getTime();
+        var differenceInDays = differenceInTime / (1000 * 3600 * 24);
+        if (endDate < startDate || differenceInDays > 30) {
+            this.setCustomValidity('Ngày kết thúc phải lớn hơn hoặc bằng Ngày bắt đầu và không vượt quá 30 ngày.');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    // Set the minimum value for both date pickers to the current date
+    document.getElementById('start').setAttribute('min', todayFormatted);
+    document.getElementById('end').setAttribute('min', todayFormatted);
+</script>
+

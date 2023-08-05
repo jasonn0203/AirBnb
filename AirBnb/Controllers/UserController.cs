@@ -296,9 +296,6 @@ namespace AirBnb.Controllers
 
 
 
-
-
-
         //Hủy đặt phòng
         [HttpPost]
         public ActionResult CancelReservations(int MaPhong)

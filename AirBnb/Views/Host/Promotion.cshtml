@@ -57,10 +57,15 @@
                         @Html.DisplayFor(modelItem => item.UuDai)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.MaKM }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.MaKM }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.MaKM })
-                    </td>
+
+                        <form method="post" action="@Url.Action("DeletePromotion", "Host", new { id = item.MaKM })" onsubmit="return confirm('Are you sure you want to delete this promotion?');">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn text-danger">
+                                <i class="fa-solid fa-xmark"></i>
+                                Delete
+                            </button>
+
+                        </form>
                 </tr>
             }
 

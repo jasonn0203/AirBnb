@@ -184,8 +184,9 @@ namespace AirBnb.Controllers
             ViewBag.SoLuongPhong = roomQuantity;
 
             //truyền tổng doanh thu
-            decimal totalRevenue = CalculateTotalRevenue(maChuNha);
+            decimal? totalRevenue = CalculateTotalRevenue(maChuNha);
             ViewBag.TongDoanhThu = totalRevenue;
+
 
             //Tổng KH đặt phòng
             int numberOfBookings = GetNumberOfBookings(maChuNha);
@@ -207,16 +208,20 @@ namespace AirBnb.Controllers
         }
 
 
-        private decimal CalculateTotalRevenue(int hostId)
+        private decimal? CalculateTotalRevenue(int hostId)
         {
-            //Tính tổng doanh thu
-
-            decimal totalRevenue = db.DonDatPhongs
+            // Tính tổng doanh thu
+            decimal? totalRevenue = db.DonDatPhongs
                 .Where(d => d.Phong.MaChuNha == hostId)
-                .Sum(d => d.TongChiPhi);
+                .Sum(d => (decimal?)d.TongChiPhi); // Use (decimal?) to convert to nullable decimal
 
             return totalRevenue;
         }
+
+
+
+
+
 
         private int GetNumberOfBookings(int hostId)
         {
@@ -386,7 +391,7 @@ namespace AirBnb.Controllers
                 phong.MaChuNha = chuNha.MaChuNha;
 
 
-
+                UpdateRentalDates();
 
                 // Thực hiện lưu thông tin phòng vào cơ sở dữ liệu
                 db.Phongs.Add(phong);
@@ -470,6 +475,8 @@ namespace AirBnb.Controllers
                 getRoomInDb.HinhAnh5 = phong.HinhAnh5;
                 getRoomInDb.TinhTrang = phong.TinhTrang;
 
+                UpdateRentalDates();
+
                 db.SaveChanges();
                 return RedirectToAction("RoomManagement");
             }
@@ -486,6 +493,16 @@ namespace AirBnb.Controllers
 
             return View(phong);
         }
+
+
+        public void UpdateRentalDates()
+        {
+            using (AirbnbEntities context = new AirbnbEntities())
+            {
+                context.Database.ExecuteSqlCommand("UpdateRentalDates");
+            }
+        }
+
 
         //---------------------------------------------------
         [HttpPost]
@@ -563,6 +580,18 @@ namespace AirBnb.Controllers
             return View(promotion);
         }
 
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePromotion(int id)
+        {
+            KhuyenMai km = db.KhuyenMais.Find(id);
+            if (km == null)
+            {
+                return HttpNotFound();
+            }
+            db.KhuyenMais.Remove(km);
+            db.SaveChanges();
+            return RedirectToAction("Promotion");
+        }
     }
 }

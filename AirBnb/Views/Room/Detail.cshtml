@@ -196,90 +196,90 @@
 
             @*Price detail*@
 
-            @if (Model.TinhTrang)
-            {
+            @*@if (Model.TinhTrang)
+                {
 
-                <div class="col-lg-4 p-4 room-checkout-booked d-flex flex-column align-items-center justify-content-center position-relative mx-auto ">
-                    <p class="text-center fw-bold fs-4 text-white">Room was booked !</p>
-                    <span class="fw-bolder fs-3 my-4 ">
-                        <span class="fw-bolder text-white">$@Model.Gia1Ngay.ToString("0")</span>
-                        <span class="fw-lighter fs-5  ">night</span>
-                    </span>
+                    <div class="col-lg-4 p-4 room-checkout-booked d-flex flex-column align-items-center justify-content-center position-relative mx-auto ">
+                        <p class="text-center fw-bold fs-4 text-white">Room was booked !</p>
+                        <span class="fw-bolder fs-3 my-4 ">
+                            <span class="fw-bolder text-white">$@Model.Gia1Ngay.ToString("0")</span>
+                            <span class="fw-lighter fs-5  ">night</span>
+                        </span>
 
-                    <a class="text-white border-white btn btn-outline-dark" href="@Url.Action("Index","Home")">Choose another rooms</a>
-                </div>
-            }
-            else
-            {
-                <div class="col-lg-4 p-4 room-checkout position-relative mx-auto  ">
-                    <form method="post" action="@Url.Action("AddToReservations", "User")" onsubmit="return validateForm()">
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bolder fs-3 ">
-                                <span class="primaryColor">$@Model.Gia1Ngay.ToString("0")</span>
-                                <span class="fw-lighter fs-5 ">night</span>
-                            </span>
+                        <a class="text-white border-white btn btn-outline-dark" href="@Url.Action("Index","Home")">Choose another rooms</a>
+                    </div>
+                }
+                else
+                {*@
+            <div class="col-lg-4 p-4 room-checkout position-relative mx-auto  ">
+                <form method="post" action="@Url.Action("AddToReservations", "User")" onsubmit="return validateForm()">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bolder fs-3 ">
+                            <span class="primaryColor">$@Model.Gia1Ngay.ToString("0")</span>
+                            <span class="fw-lighter fs-5 ">night</span>
+                        </span>
+                    </div>
+
+                    <div class="my-2">Guest:</div>
+                    <div class="input-group my-2">
+                        <select class="form-select" name="guests" id="guestSelect" aria-label="Example select with button addon">
+                            <option selected>Select ..</option>
+                            @for (int i = 1; i <= Model.SLKhach; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    @*Date Picker*@
+
+
+                    <div class="d-flex justify-content-between column-gap-2 my-3">
+                        <input placeholder="Start Date" type="date" id="start" name="start" value="" min="@Model.NgayBatDau.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
+                        <input placeholder="End Date" type="date" id="end" name="end" value="" min="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
+                    </div>
+
+
+
+
+
+                    @*Price and Fees*@
+                    <div class="my-4">
+                        <div class="d-flex justify-content-between mb-4  ">
+                            <p id="numNights" class="text-black-50 fw-bold"> </p>
+                            <p class=" fw-bold primaryColor" id="priceByNights"></p>
                         </div>
 
-                        <div class="my-2">Guest:</div>
-                        <div class="input-group my-2">
-                            <select class="form-select" name="guests" id="guestSelect" aria-label="Example select with button addon">
-                                <option selected>Select ..</option>
-                                @for (int i = 1; i <= Model.SLKhach; i++)
-                                {
-                                    <option value="@i">@i</option>
-                                }
-                            </select>
+                        <div class="d-flex justify-content-between mb-4  text-black-50">
+                            <p class="text-black-50 fw-bold">Airbnb Service Fee</p>
+                            <p class=" fw-bold primaryColor">15$</p>
                         </div>
 
-
-                        @*Date Picker*@
-
-
-                        <div class="d-flex justify-content-between column-gap-2 my-3">
-                            <input placeholder="Start Date" type="date" id="start" name="start" value="" min="@Model.NgayBatDau.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
-                            <input placeholder="End Date" type="date" id="end" name="end" value="" min="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" max="@Model.NgayKetThuc.ToString("yyyy-MM-dd")" />
+                        <div class="d-flex justify-content-between pb-4 text-black-50 border-bottom">
+                            <p class="text-black-50 fw-bold">Cleaning Fee</p>
+                            <p class=" fw-bold primaryColor">5$</p>
                         </div>
 
-
-
-
-
-                        @*Price and Fees*@
-                        <div class="my-4">
-                            <div class="d-flex justify-content-between mb-4  ">
-                                <p id="numNights" class="text-black-50 fw-bold"> </p>
-                                <p class=" fw-bold primaryColor" id="priceByNights"></p>
-                            </div>
-
-                            <div class="d-flex justify-content-between mb-4  text-black-50">
-                                <p class="text-black-50 fw-bold">Airbnb Service Fee</p>
-                                <p class=" fw-bold primaryColor">15$</p>
-                            </div>
-
-                            <div class="d-flex justify-content-between pb-4 text-black-50 border-bottom">
-                                <p class="text-black-50 fw-bold">Cleaning Fee</p>
-                                <p class=" fw-bold primaryColor">5$</p>
-                            </div>
-
-                            @*TOTAL FEE*@
-                            <div class="d-flex justify-content-between pt-2 text-black-50 ">
-                                <p class="fw-bold fs-4 primaryColor">Total Fee</p>
-                                <p class=" fw-bold primaryColor fs-4" id="totalFee">$20</p>
-                            </div>
-
+                        @*TOTAL FEE*@
+                        <div class="d-flex justify-content-between pt-2 text-black-50 ">
+                            <p class="fw-bold fs-4 primaryColor">Total Fee</p>
+                            <p class=" fw-bold primaryColor fs-4" id="totalFee">$20</p>
                         </div>
-                        <input type="hidden" name="MaPhong" value="@Model.MaPhong" />
-                        <input type="hidden" id="pricePerNight" value="@Model.Gia1Ngay" />
+
+                    </div>
+                    <input type="hidden" name="MaPhong" value="@Model.MaPhong" />
+                    <input type="hidden" id="pricePerNight" value="@Model.Gia1Ngay" />
 
 
-                        @*Button*@
-                        <button type="submit" class="btn-reserve position-absolute fixed-bottom  border-0 " href="#">Reserve</button>
+                    @*Button*@
+                    <button type="submit" class="btn-reserve position-absolute fixed-bottom  border-0 " href="#">Reserve</button>
 
 
-                    </form>
-                </div>
+                </form>
+            </div>
 
-            }
+            @*}*@
 
 
         </div>

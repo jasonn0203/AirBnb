@@ -41,5 +41,10 @@ namespace AirBnb.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateGia1Ngay");
         }
+    
+        public virtual int UpdateRentalDates()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateRentalDates");
+        }
     }
 }

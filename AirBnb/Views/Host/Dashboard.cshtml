@@ -37,7 +37,7 @@
             </div>
             @{
                 // Thay đổi định dạng hiển thị doanh thu
-                decimal totalRevenue = decimal.Parse(@ViewBag.TongDoanhThu.ToString());
+                decimal totalRevenue = ViewBag.TongDoanhThu ?? 0;
             }
 
 
@@ -50,11 +50,7 @@
                         </div>
                         <div class="stats-data">
                             <div class="stats-number">$@string.Format("{0:N}", totalRevenue)</div>
-                            @*<div class="stats-change">
-                                    <span class="stats-percentage">+17.5%</span>
-                                    <span class="stats-timeframe">from last month</span>
 
-                                </div>*@
                         </div>
                     </div>
                 </div>
