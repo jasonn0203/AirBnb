@@ -62,7 +62,7 @@ namespace AirBnb.Controllers
                 NgayBL = DateTime.Now,
             };
 
-            // Lưu đối tượng mới vào database
+            // Lưu đối tượng mới vào database.
             using (var db = new AirbnbEntities())
             {
                 db.DanhGias.Add(newComment);
